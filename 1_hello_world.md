@@ -210,4 +210,4 @@ Cursive(<https://cursiveclojure.com>)는 IntelliJ 기반의 플러그인으로 �
 
 ### 기타
 
-lighttable, vim, sublimetext, atom, elcipse등 대부분의 편집기는 클로저 플러그인을 제공한다.
+lighttable, vim, sublimetext, atom, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
