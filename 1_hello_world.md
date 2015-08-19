@@ -204,9 +204,9 @@ Hello World
 
 cider(<https://github.com/clojure-emacs/cider>)와 clojure-mode를 조합해서 사용한다. clojure 관련 패키지들도 많이 있다.(<https://github.com/clojure-emacs>)
 
-### Cursive (https://cursiveclojure.com/)
+### Cursive
 
-IntelliJ 기반의 플러그인으로 많이 사용된다.
+Cursive(<https://cursiveclojure.com>)는 IntelliJ 기반의 플러그인으로 많이 사용된다.
 
 ### 기타
 
