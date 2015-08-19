@@ -158,6 +158,56 @@ lein run -m hello.core
 Hello World
 ```
 
-## Hello World 코드 설명
+## 지금 한 일 설명
 
+### Hello World 코드의 모양
 
+```clojure
+(println "Hello World")
+```
+
+- 클로저 코드는 괄호`()`안에 들어 있다.
+- 괄호안에 들어 있는 구문들은 띄어쓰기로 구분된다. `(구문 구문 구문 구문)`
+- 따옴표 `""`안에 있는 것은 문자열이다.
+- 첫번째 구문은 함수로 동작하고 두번째 구문 부터는 함수의 파라미터로 동작한다. 
+- 결국 Hello World 코드는 `println` 함수를 `"Hello World"`라는 하나의 파라미터를 가지고 실행하는 코드다.
+
+### 처음 만든 Hello World 파일 코드 
+
+```clojure
+(ns example.hello (:gen-class))
+
+(defn -main [] (println "Hello World"))
+```
+
+- `()`는 중첩될 수 있다.
+- `ns`는 파일의 네임스페이스라고 부르는 것을 지정하는 구문으로 자바의 패키지와 유사하다.
+-  `example.hello` 네임스페이스는 자바의 패키지 처럼 디렉토리 구조와 파일명을 `example/hello.clj`으로 제한된다. 다르면 자바처럼  컴파일 에러가 난다.
+- `defn`는 함수를 정의하는 구문으로 여러개의 파라미터를 가진다. 위에서는 첫번째 파라미터로 `-main`, 두번째 파라미터로 `[]`, 세번째 파라미터로 `(println "Hello World")`를 가진다.
+- `-main`이라는 이름의 함수는 클로저에서 특별하게 자바의 main 함수를 만들어 준다.
+- 두번째 파라미터인 `[]`는 함수의 인자를 지정하는 것으로 위에서는 인자가 없다는 뜻이다. 인자가 있다면 `[x y]`등으로 인자 이름을 나열해준다. 타입은 없다.
+- 함수에 마지막 실행 결과가 리턴 값이다.
+- 컴파일 결과 클래스를 생성하기 위해서 네임스페이스 두번째 인자로 `(:gen-class")`구문을 넣었다.
+- 클로저는 함수 단위로 컴파일된 클래스를 생성한다.
+
+## 생길 수 있는 궁금증
+
+- repl에서 보였던 `nil`은? 널. 왜보였냐? repl은 함수의 리턴값을 표시해주고 `println`에 리턴 값이 `nil`이 였다.
+- Leiningen으로 실행할 때는 `(:gen-class)`가 없었다? `lein run`는 내부에서 REPL을 실행하고 함수를 바로 부르기 때무에 클래스 파일을 만들지 않는다.
+
+## 편집기
+
+클로저 코드를 편집할때는 중첩된 괄호가 많이 사용되기 때문에 구조적 에디팅(structual editing)이 필수다.
+또 작업 중에 REPL을 많이 사용하기 때문에 편집기 안에서 실행할 수 있어야한다.
+
+### Emacs
+
+cider(<https://github.com/clojure-emacs/cider>)와 clojure-mode를 조합해서 사용한다. clojure 관련 패키지들도 많이 있다.(<https://github.com/clojure-emacs>)
+
+### Cursive (https://cursiveclojure.com/)
+
+IntelliJ 기반의 플러그인으로 많이 사용된다.
+
+### 기타
+
+lighttable, vim, sublimetext, atom, elcipse등 대부분의 편집기는 클로저 플러그인을 제공한다.
