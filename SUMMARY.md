@@ -1,3 +1,3 @@
-# Summary
+# 목차
 
-* [First Chapter](chapter1.md)
+* [Hello World](1_hello_world.md)
