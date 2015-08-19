@@ -20,7 +20,15 @@
 
 2. Clojure JAR 파일
 
-    클로저 다운로드 페이지 (http://clojure.org/downloads) 에서 최신버전을 다운로드 한다. 글을 작성하는 시점에 최신 버전은 1.7.0 버전이다.
+    클로저 다운로드 페이지(<http://clojure.org/downloads>)에서 최신버전을 다운로드 한다. 글을 작성하는 시점에 최신 버전은 1.7.0 버전이다.
+    
+### 실행 방법
+
+여러가지 실행 방법이 있는데 
+
+1. REPL(Read Eval Print Loop)에서 실행하기
+2. 파일에 작성된 코드를 실행하기
+3. 클로저 프로젝트를 만들어서 실행하기
     
 ### REPL(Read Eval Print Loop)에서 실행하기
 
@@ -83,6 +91,73 @@ java -cp classes:clojure-1.7.0.jar example.hello
 Hello World
 ```
 
+### 클로저 프로젝트를 만들어서 실행하기
 
+자바의 메이븐 프로젝트와 같이 클로저도 프로젝트를 관리해주는 도구가 있다. 가장 유명한 프로젝트 관리 도구는 Leiningen(<http://leiningen.org>)이라는 것이 있고 좀 덜 유명하지만 뜨고 있는 Boot(<http://boot-clj.com>)라는 프로젝트 관리 도구도 있다. 여기서는 Leiningen으로 실행하는 것만 알아보자.
+
+#### Leiningen 설치하기
+
+Leiningen은 스크립트 파일 형태로 되어 있어서 파일을 다운로드하고 실행권한을 주고 실행하면 된다. 
+
+어디서나 실행가능하게 PATH에 추가해주면 편리하다.
+
+
+```bash
+wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+chmod +x ./lein
+```
+
+#### Leiningen 프로젝트 생성
+
+```bash
+lein new hello
+```
+
+위의 명령어를 실행하면 `hello` 디렉토리가 생기고 그 안에 다음과 같은 파일들이 생긴다.
+
+```bash
+hello
+├── LICENSE
+├── README.md
+├── doc
+│   └── intro.md
+├── project.clj
+├── resources
+├── src
+│   └── hello
+│       └── core.clj
+└── test
+    └── hello
+        └── core_test.clj
+```
+
+`project.clj`파일은 메이븐 `pom.xml`와 비슷한 기능을한다.
+
+`src/hello/core.clj`는 샘플 클로저 파일이다.
+
+`test/hello/core_test.clj`는 샘플 클로저 테스트 파일이다.
+
+#### `src/hello/core.clj` 수정하기
+
+이 파일에 Hello World를 작성한다.
+
+기본으로 만들어 준 내용은 지우고 아래와 같이 코드를 작성한다.
+
+```clojure
+(ns hello.core)
+
+(defn -main [] (println "Hello World"))
+```
+
+#### lein으로 실행하기
+
+프로젝트 최상위 디렉토리(`hello` 디렉토리)에서 아래 명령어를 실행한다.
+
+```bash
+lein run -m hello.core
+Hello World
+```
+
+## Hello World 코드 설명
 
 
