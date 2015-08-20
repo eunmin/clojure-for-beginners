@@ -2,8 +2,8 @@
 
 클로저에는 여러가지 데이터 형식이 있다. 
 
-아래 코드를 테스트 해보기 위해 REPL을 실행한다.
-REPL을 그냥 Clojure JAR를 가지고 실행할 수 도 있지만 보통 Leiningen 스크립트를 받았다면 `lein repl` 명령어로 실행할 수 있다. 
+앞으로 나오는 코드를 테스트 하기위해 REPL을 실행한다.
+REPL을 그냥 Clojure JAR를 가지고 실행할 수 도 있지만 보통 Leiningen에 제공하는 `lein repl` 명령어로 실행하면 더 사용하기 좋다.
 
 ```clojure
 lein repl
