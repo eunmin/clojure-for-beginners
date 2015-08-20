@@ -87,6 +87,76 @@ user=> (+ 1 2 3 4 5)
 15
 ```
 
+값이 같은지 비교하는 `=` 함수도 있다.
+
+```clojure
+user=> (= 1 1)
+true
+user=> (= 1 1.5)
+false
+```
+
+## 문자
+
+단일 문자로 `\문자` 형태로 사용한다.
+
+```clojure
+user=> \a
+\a
+```
+
+UTF-8을 지원하기 때문에 한글도 사용할 수 있다.
+
+```clojure
+user=>\가
+\가
+```
+
+## 문자열
+
+문자열은 `"`로 감싸서 표현한다.
+
+```clojure
+user=> "clojure"
+"clojure"
+```
+
+다양한 문자열 함수들을 제공한다.
+
+```clojure
+user=> (str "Hello" " " "World")
+"Hello World"
+user=> (format "Hello %s" "World")
+"Hello World"
+user=> (count "Hello")
+5
+```
+
+문자열 비교도 `=` 함수로 하면 된다.
+
+```clojure
+user=> (= "clojure" "clojure")
+true
+user=> (= "clojure" "eunmin")
+false
+```
+
+자바에서와 같이 같은 static 문자열은 문자열 테이블에 있는 객체를 사용하기 때문에 `=`가 재대로 비교하는지 의심이 들겠지만 아래의 테스트로 실제 값이 같은지를 `=`로 비교해도 된다는 것을 알 수 있다.
+
+```clojure
+user=> (= "abc" (str "a" "b" "c"))
+true
+user=> (identical? "abc" (str "a" "b" "c"))
+false
+user=> (identical? "abc" "abc")
+true
+```
+
+
+
+
+
+
 
 
 
