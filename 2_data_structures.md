@@ -152,8 +152,136 @@ user=> (identical? "abc" "abc")
 true
 ```
 
+## 리스트
 
+순서가 있는 값의 목록으로 `(항목 항목 항목)`형태로 표현한다.
 
+```clojure
+user=> (+ 1 2)
+3
+```
+
+위의 리스트는 첫번째 항목이 `+` 함수, 두번째 항목이 `1`, 세번째 항목이 `2` 값을 갖는 리스트다.
+
+첫번째 항목은 함수로 실행하기 때문에 위의 REPL에서는 실행 결과인 3을 표시해줬다.
+
+리스트가 실행이 되는 것을 막기 위해서는 앞에 `'`를 붙여줘서 평가를 하지 않도록 할 수 있다.
+
+```clojure
+user=> '(+ 1 2)
+(+ 1 2)
+user=> '(0 1 2)
+(0 1 2)
+user=> '("클로저" "데이터" "형식")
+("클로저" "데이터" "형식")
+```
+
+리스트를 위한 다양한 함수들이 있다.
+
+```clojure
+user=> (first '(0 1 2))
+0
+user=> (first '(+ 1 2))
++
+user=> (second '(+ 1 2))
+1
+user=> (last '(+ 1 2))
+2
+user=> (rest '(+ 1 2))
+(1 2)
+user=> (count '(+ 1 2))
+3
+```
+
+## 벡터
+
+리스트와 같이 순서가 있는 항목으로 `[항목 항목 항목]` 형태로 표현한다.
+
+리스트는 첫번째 항목이 평가되 함수로 실행되어 데이터로 사요하기 번거롭기 때문에 주로 데이터를 담을 때 벡터를 이용한다.
+
+리스트 함수를 모두 사용할 수 있다.
+
+```clojure
+user=> [0 1 2]
+[0 1 2]
+```
+
+## 맵
+
+키/값 형식을 가지는 데이터 구조로 순서는 보장되지 않는다.
+
+`{키 값, 키 값}` 형태로 표현한다.
+
+```clojure
+user=> {"id" 1, "name" "eunmin"}
+{"id" 1, "name" "eunmin"}
+```
+
+중간에 사용하는 `,`는 생략할 수 있다.
+
+```clojure
+user=> {"id" 1 "name" "eunmin"}
+{"id" 1, "name" "eunmin"}
+```
+
+한 맵에서 키 데이터 형식은 섞어 쓸 수 있다.
+
+```clojure
+user=> {34932 "httpd", "cpu" 98}
+{"cpu" 98, 34932 "httpd"}
+```
+
+`get` 함수를 써서 키를 가지고 값을 가져올 수 있다.
+
+```clojure
+user=> (get {"name" "eunmin", "level" 40} "name")
+"eunmin"
+```
+
+`assoc` 함수로 값을 추가하거나 변경할 수 있다.
+
+```clojure
+user=> (assoc {"name" "eunmin" "level" 40} "server" "asia")
+{"server" "asia", "name" "eunmin", "level" 40}
+user=> (assoc {"name" "eunmin" "level" 40} "level" 41)
+{"name" "eunmin", "level" 41
+```
+
+## 키워드
+
+주로 맵의 키로 사용되는 형식으로 `:이름`으로 표현한다.
+
+키워드로 맵의 키를 사용할 때는 가독성을 위해 `,`를 생략한다.
+
+```clojure
+user=> :id
+:id
+user=> {:id 2232 :name "eunmin"}
+{:id 2232, :name "eunmin"}
+```
+
+`keyword`라는 함수로 문자열을 가지고 키워드를 만들 수 있다.
+
+```clojure
+user=> (keyword "id")
+:id
+```
+
+문자열과 다르게 같은 키워드는 같은 인스턴스를 가리킨다.따라서 같은 이름의 키워드가 많이 생겨도 하나의 인스턴스를 유지한다.
+
+```clojure
+user=> (identical? (keyword "id") (keyword (str "i" "d")))
+true
+```
+
+키워드는 함수로 맵에서 자신을 키로 가지는 값을 가져온다.
+
+```clojure
+user=> (:id {:id 2232 :name "eunmin"})
+2232
+user=> (:name {:id 2232 :name "eunmin"})
+"eunmin"
+```
 
 
 
