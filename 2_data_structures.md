@@ -236,7 +236,11 @@ user=> {34932 "httpd", "cpu" 98}
 ```clojure
 user=> (get {"name" "eunmin", "level" 40} "name")
 "eunmin"
+user=> (get {"name" "eunmin", "level" 40} "id")
+nil
 ```
+
+`get`에서 키가 없다면 `nil`값이 리턴된다. 
 
 `assoc` 함수로 값을 추가하거나 변경할 수 있다.
 
@@ -283,6 +287,33 @@ user=> (:name {:id 2232 :name "eunmin"})
 "eunmin"
 ```
 
+## 셑
+
+중복되지 않는 항목을 가지는 데이터 형태로 `#{항목 항목 항목}` 으로 표현한다. 맵처럼 순서는 보장되지 않는다.
+
+```clojure
+user=> #{3 2 1}
+#{1 3 2}
+```
+
+중복된 값을 넣으면 예외가 발생한다.
+
+```clojure
+user=> #{1 2 3 1}
+
+IllegalArgumentException Duplicate key: 1  clojure.lang.PersistentHashSet.createWithCheck (PersistentHashSet.java:68)
+```
+
+맵처럼 `get`이나 키워드로 항목을 가져올 수 있다.
+
+```clojure
+user=> (get #{1 2 3} 1)
+1
+user=> (:id #{:id :name :title})
+:id
+user=> (:level #{:id :name :title})
+nil
+```
 
 
 
