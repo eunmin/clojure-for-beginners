@@ -315,7 +315,40 @@ user=> (:level #{:id :name :title})
 nil
 ```
 
+`contains?` 함수로 값이 있는지 확인 할수 있다.
 
+```clojure
+user=> (contains? #{:id :name :level} :id)
+true
+```
+
+## 심볼
+
+그냥 문자들은 심볼 데이터이고 주로 이름에 사용된다
+
+REPL에서 심볼은 평가하려고 한다.
+
+```clojure
+user=> a
+
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: a in this context, compiling:(NO_SOURCE_PATH:0:0)
+```
+
+REPL에서 평가되지 않게 하려면 리스트처럼 `'`를 앞에 붙여 주면 된다.
+
+```clojure
+user=> 'a
+a
+```
+
+UTF-8을 지원하기 때문에 한글 심볼도 사용할 수 있다.
+
+```clojure
+user=> '더하기
+더하기
+```
+
+심볼은 값에 바인딩되어 값의 이름으로 사용될 수 있다.
 
 
 
