@@ -113,8 +113,30 @@ user=> (((fn [y] (fn [x] (+ x y))) 2) 1)
 
 ## 가변 인자를 받는 함수
 
+가변 인자를 받는 함수를 만들 때는 마지막 인자 앞에 `&`을 붙여서 만든다. 가변 인자로 사용된 마지막 인자는 벡터로 넘어온다.
 
+```clojure
+user=> ((fn [x & y] y) 1)
+nil
+user=> ((fn [x & y] y) 1 2)
+(2)
+user=> ((fn [x & y] y) 1 2 3)
+(2 3)
+```
 
+## Overloading
+
+가변인자 함수는 인자 개수가 명시적이지 않기 때문에 정해진 갯수의 인자를 제공하는 함수의 경우에는 함수 오버로딩을 사용하는 것이 좋다.
+
+```clojure
+user=> ((fn ([x] x) ([x y] (+ x y))) 1)
+1
+user=> ((fn ([x] x) ([x y] (+ x y))) 1 2)
+3
+user=> ((fn ([x] x) ([x y] (+ x y))) 1 2 3)
+
+ArityException Wrong number of args (3) passed to: user/eval15184/fn--15185  clojure.lang.AFn.throwArity (AFn.java:429)
+```
 
 
 
