@@ -254,6 +254,18 @@ user=> a
 user=> (alter-var-root (var a) (fn [_] 2))
 ```
 
+위의 예제 함수는 그냥 `2`를 리턴하는 함수인데 이런 함수를 만들일이 종종 생겨 클로저에서는 `constantly`라는 함수를 제공한다.
+
+```clojure
+user=> (def two (constantly 2))
+#'user/two
+user=> (two)
+2
+user=> (alter-var-root #'a (constantly 2))
+2
+user=> a
+2
+```
 
 
 
