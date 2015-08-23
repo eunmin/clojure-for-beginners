@@ -51,6 +51,8 @@ user=> (if 1 2 3)
 2
 ```
 
+## 테스트 구문
+
 조건을 판단해주는 `=`, `>`, `<`, `>=`, `<=` 등이 있다.
 
 ```clojure
@@ -83,6 +85,8 @@ user=> (if (not (< 1 2)) 1 2)
 user=> (if (not= 1 2) 1 2)
 1
 ```
+
+## and와 or
 
 여러 조건을 조합하기 위해 `and`와 `or`를 제공한다.
 
@@ -134,4 +138,43 @@ user=> (let [limit (or (:limit params) 50)] limit)
 50
 ```
 
+## if-let
 
+아래는 `get-user`라는 함수로 가져온 값을 `user`에 로컬 바인딩하고 `user`값이 있으면 `:id`값을 리턴하고 없으면 "user not found"라는 문자열을 리턴하는 예제다.
+
+```clojure
+user=> (defn get-user []
+  #_=>   {:id 1 :name "eunmin"})
+#'user/get-user
+
+user=> (let [user (get-user)]
+  #_=>   (if user
+  #_=>     (:id user)
+  #_=>     "user not found"))
+1
+```
+
+예제에서는 `get-user`가 항상 값을 리턴하기 때문에 `:id`값이  `1`이 나왔다.
+
+하지만 `get-user`가 `nil`을 리턴 할수도 있다면 위와 같이 사용해서 `nil`인 경우에 대한 처리를 해줘야한다.
+
+이런 경우에 간단히 사용할 수 있는 것이 `if-let` 구문이다.
+
+```clojure
+user=> (if-let [user (get-user)]
+  #_=>   (:id user)
+  #_=>   "user not found")
+1
+```
+
+조건과 바인딩을 동시해 해서 코드를 조금더 간단하게 쓸 수 있다.
+
+다만 `let`과 같이 여러개를 바인딩 할 수는 없다.
+
+`if-let` 비슷하게 `when-let`도 있다. `when-let`은 거짓에 대한 값이 없는 경우 사용할 수 있다.
+
+```clojure
+user=> (when-let [user (get-user)]
+  #_=>   (:id user))
+1
+```
