@@ -191,3 +191,25 @@ user=> (if (zero? 0) 1 2)
 user=> (if (zero? 1) 1 2)
 2
 ```
+
+## 예제
+
+```clojure
+(def http-default-port 80)
+
+(def config {:production {:host "10.0.0.1"
+                          :port http-default-port}
+             :development {:host "127.0.0.1"
+                           :port 8080}})
+
+(defn url [conf]
+  (str "http://" (:host conf)
+    (when (not= http-default-port (:port conf))
+      (str ":" (:port conf)))))
+
+(url (:production config))
+; => "http://10.0.0.1"
+
+(url (:development config))
+; => "http://127.0.0.1:8080"
+```
