@@ -42,6 +42,15 @@ user=> (+ (if false 1 2) 3)
 5
 ```
 
+`nil`은 거짓으로 판단되고 그렇지 않는 값은 참으로 판단된다.
+
+```clojure
+user=> (if nil 2 3)
+3
+user=> (if 1 2 3)
+2
+```
+
 조건을 판단해주는 `=`, `>`, `<`, `>=`, `<=` 등이 있다.
 
 ```clojure
@@ -86,6 +95,43 @@ user=> (if (or (= 1 1) (= 2 3)) "O" "X")
 "O"
 user=> (if (or (= 1 2) (= 2 3)) "O" "X")
 "X"
+```
+
+`and`와 `or` 구문은 따로 쓸 수도 있다.
+
+`and`는 항목의 값을 하나씩 판단하는데 먼저 나오는 거짓값을 나타낸다.
+
+```clojure
+user=> (and (+ 1 2) (+ 3 4) nil (+ 5 6))
+nil
+user=> (and false (+ 1 2) (+ 3 4) (+ 5 6))
+false
+```
+
+위에 있는 첫번째 예제에서 `and`는 `nil`이 나오기 전까지만 확인해보고 이후에 있는 값은 무시한다. 
+
+두번째 예제는 바로 false라 아무것도 확인하지 않는다.
+
+`or`도 따로 쓸 수 있다.
+
+```clojure
+user=> (or 1 2)
+1
+user=> (or nil 2)
+2
+```
+
+`or`는 처음 나온는 참값을 나타낸다. 때에 따라서 값이 없을 때 기본값을 사용하기 좋다.
+
+```clojure
+user=> (def params {:limit 10})
+#'user/params
+user=> (let [limit (or (:limit params) 50)] limit)
+10
+user=> (def params {})
+#'user/params
+user=> (let [limit (or (:limit params) 50)] limit)
+50
 ```
 
 
