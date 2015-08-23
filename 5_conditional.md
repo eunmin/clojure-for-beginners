@@ -142,6 +142,8 @@ user=> (let [limit (or (:limit params) 50)] limit)
 
 아래는 `get-user`라는 함수로 가져온 값을 `user`에 로컬 바인딩하고 `user`값이 있으면 `:id`값을 리턴하고 없으면 "user not found"라는 문자열을 리턴하는 예제다.
 
+이번에는 코드가 좀 길어 보기 좋으라고 중간 중간 개행을 해줬다.
+
 ```clojure
 user=> (defn get-user []
   #_=>   {:id 1 :name "eunmin"})
@@ -177,4 +179,15 @@ user=> (if-let [user (get-user)]
 user=> (when-let [user (get-user)]
   #_=>   (:id user))
 1
+```
+
+## 조건 함수에 대한 네이밍
+
+클로저에서는 `true` 또는 `false`를 리턴하는 조건 함수들은 `?`로 끝나는 네이밍 규칙을 사용한다.
+
+```clojure
+user=> (if (zero? 0) 1 2)
+1
+user=> (if (zero? 1) 1 2)
+2
 ```
