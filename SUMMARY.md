@@ -6,4 +6,5 @@
 * [함수](3_functions.md)
 * [Vars](4_vars.md)
 * [조건문](5_conditional.md)
+* 시퀀스
 
