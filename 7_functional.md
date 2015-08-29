@@ -85,15 +85,50 @@ user=> (inc-level user [1 5 1 2])
 그래서 보통 클로저에서 꼬리 재귀를 사용할 때는 `recur` 함수를 쓴다.
 
 ```clojure
-user=> (defn inc-level [user data]
-  #_=>   (if (empty? data)
-  #_=>     user
-  #_=>     (recur (update-in user [:level] #(+ (first data) %)) (rest data))))
+(defn inc-level [user data]
+  (if (empty? data)
+    user
+    (recur (update-in user [:level] #(+ (first data) %)) (rest data))))
 ```
 
 위의 예제에서 안쪽에 `inc-level` 대신 `recur`로 바꾸기만 하면 된다. 
 
+### 시퀀스 함수
 
+6장 시퀀스에서 알아본것 처럼 클로저는 다양한 시퀀스 함수가 있다.
 
+꼬리 재귀 함수들로 처리해야하는 것들은 대부분 시퀀스 함수로 처리할 수 있기 때문에 클로저 프로그램에서 재귀 함수를 사용할일은 그렇게 많지 않다.
+
+```clojure
+(def users [{:id 1 :name "eunmin" :level 2}
+            {:id 2 :name "alan" :level 100}
+            {:id 3 :name "alonzo" :level 150}])
+
+(defn up-level [init-users]
+  ((fn [result users]
+      (if (empty? users)
+        result
+        (recur (conj result (update-in (first users) [:level] inc))
+          (rest users))))
+   [] init-users))
+   
+user=> (up-level users)
+[{:name "eunmin", :level 3, :id 1} {:name "alan", :level 101, :id 2} {:name "alonzo", :level 151, :id 3}]
+```
+
+위의 예제는 `users` 벡터에 있는 모든 유저의 레벨을 1 올리는 예제다. 
+
+위에서 `conj` 함수는 벡터에 새로운 항목을 뒤에 추가하기 위해 사용한 함수다.
+
+재귀 함수를 사용하면서 `users`에 있는 모든 항목에 `update-in`으로 1 증가시키는 `inc`로 `:level`을 증가해줬다.
+
+위 예제를 시퀀스 함수를 사용하도록 바꾸면 아래와 같다.
+
+```clojure
+(defn up-level [users]
+  (map #(update-in % [:level] inc) users))
+```
+
+보는 것 처럼 더 간결하기 때문에 반복되는 일은 대부분 시퀀스 함수를 써서 표현한다.
 
 
