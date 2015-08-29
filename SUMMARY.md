@@ -7,4 +7,5 @@
 * [Vars](4_vars.md)
 * [조건문](5_conditional.md)
 * [시퀀스](6_sequences.md)
+* 함수형 프로그래밍
 
