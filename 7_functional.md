@@ -205,11 +205,12 @@ x: 1 y: 1
 2
 ```
 
-다음은 데이터베이스에 `insert` 문을 실행하고 자동 생성된 아이디를 리턴하는 예제다.
+다음은 데이터베이스에 `insert` 문을 실행하고 추가한 `user`를 리턴하는 함수 예제다.
 
 ```clojure
 user=> (defn insert-user! [db-spec user]
-  #_=>   (:generated_key (first (jdbc/insert! db-spec :users user))))
+  #_=>   (jdbc/insert! db-spec :users user)
+  #_=>   user)
 ```
 
 부수 효과가 없는 함수를 순수 함수라고 하는데 순수 함수는 몇번이 불려도 입력값이 같다면 프로그램에서 문제가 되지 않고 항상 같은 결과가 나온다.
