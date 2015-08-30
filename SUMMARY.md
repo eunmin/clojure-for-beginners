@@ -8,5 +8,5 @@
 * [조건문](5_conditional.md)
 * [시퀀스](6_sequences.md)
 * [함수형 프로그래밍](7_functional.md)
-* 네임스페이스
+* [네임스페이스](8_namespaces.md)
 
