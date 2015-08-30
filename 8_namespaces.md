@@ -108,7 +108,7 @@ namespace-sample.handler.user=>
 
 ## 네임스페이스와 파일명
 
-처음 Hello World 예제에서 아래와 같은 코드를 작성했다.
+처음 만들었던 Hello World 예제에서 아래와 같은 코드를 작성했다.
 
 ```clojure
 (ns example.hello)
@@ -122,7 +122,7 @@ namespace-sample.handler.user=>
 
 따라서 `(ns namespace-sample.handler.user)`는 `namespace_sample/handler/user.clj`에 있어야 한다.
 
-주의 깊게 봐야할 것은 대쉬 `-` 기호는 실제 파일이나 디렉토리명에서 밑줄 `_` 기호로 바꿔서 사용해야한다는 점이다.
+한 가지 주의해야할 것은 네임스페이스에 대쉬 `-` 기호를 파일/디렉토리에서는 `_` 기호로 바꿔서 써야한다는 것이다.
 
 ## 네임스페이스를 다른 이름으로 사용하기
 
@@ -148,7 +148,7 @@ group=> user-handler/header-name
 "user"
 ```
 
-사용법은 `require`에 네임스페이스 부분을 벡터로 바꾸고 벡터의 첫번째 항목에 사용할 네임스페이스 뒤에 `:as` 키워드와 바꿔쓸 심볼을 적어주면된다.
+사용법은 `require`에 네임스페이스 부분을 벡터로 바꾸고 벡터의 첫번째 항목에 사용할 네임스페이스를 적고 그 뒤에 `:as` 키워드와 바꿔쓸 심볼을 차례로 벡터에 넣어 주면된다.
 
 물론 `ns`를 사용할 때도 alias를 사용할 수 있다.
 
