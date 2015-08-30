@@ -55,7 +55,7 @@ user=>
 
 `example`라는 디렉토리를 만들고 그 안에 `hello.clj` 파일을 만들어 아래와 같이 코드를 입력하고 저장한다.
 
-  ```clojure
+```clojure
 (ns example.hello (:gen-class))
 
 (defn -main [] (println "Hello World"))
