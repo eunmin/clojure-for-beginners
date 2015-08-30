@@ -103,6 +103,9 @@ nil
 namespace-sample.handler.user=>
 ```
 
+첫 계층은 대부분 프로젝트 이름을 사용한다.
+자바 처럼 도메인을 뒤집어 사용하는 경우도 있지만 대부분 그냥 프로젝트 이름을 사용한다.
+
 ## 네임스페이스와 파일명
 
 처음 Hello World 예제에서 아래와 같은 코드를 작성했다.
@@ -123,10 +126,110 @@ namespace-sample.handler.user=>
 
 ## 네임스페이스를 다른 이름으로 사용하기
 
+네임스페이스를 나눠쓰면 길어지기 마련이다.
+
+```clojure
+namespace-sample.handler.user=> (def header-name "user")
+#'namespace-sample.handler.user/header-name
+namespace-sample.handler.user=> (ns group)
+nil
+group=> (require 'namespace-sample.handler.user)
+nil
+group=> namespace-sample.handler.user/header-name
+"user"
+```
+
+이럴 때는 네임스페이스 alias를 사용해서 짧게 줄여 쓸 수 있다.
+
+```clojure
+group=> (require '[namespace-sample.handler.user :as user-handler])
+nil
+group=> user-handler/header-name
+"user"
+```
+
+사용법은 `require`에 네임스페이스 부분을 벡터로 바꾸고 벡터의 첫번째 항목에 사용할 네임스페이스 뒤에 `:as` 키워드와 바꿔쓸 심볼을 적어주면된다.
+
+물론 `ns`를 사용할 때도 alias를 사용할 수 있다.
+
+```clojure
+group=> (ns group (:require [namespace-sample.handler.user :as user-handler]))
+nil
+group=> user-handler/header-name
+"user"
+```
 
 ## 현재 네임스페이스에 있는 이름 처럼 쓰기
 
+DSL 같은 라이브러리와 같이 외부에 있는 이름을 현재 네임스페이스에 있는 이름 처럼 쓰면 더 깔끔해 보일 때가 있다.
+
+이때는 `require`의 `refer` 옵션을 사용하면 된다.
+
+```clojure
+group=> (require '[namespace-sample.handler.user :refer [header-name]])
+nil
+group=> header-name
+"user"
+```
+
+사용법은 `:refer` 키워드 뒤에 사용할 네임스페이스에 있는 이름 심볼을 벡터에 넣어주면 된다. 여러개가 있다면 여러개 넣어주면 된다.
+
+```clojure
+group=> (require '[clojure.test :refer [deftest is]])
+nil
+group=> (deftest addition
+   #_=>   (is (= 4 (+ 2 2)))
+   #_=>   (is (= 7 (+ 3 4))))
+#'group/addition
+```
+
+만약 다른 네임스페이스에 있는 이름 전부를 현재 이름에 있는 것 처럼 쓰려면 `:refer` 뒤에 `:all`을 해준다.
+
+```clojure
+group=> (require '[clojure.test :refer :all])
+nil
+group=> (deftest addition
+   #_=>   (is (= 4 (+ 2 2)))
+   #_=>   (is (= 7 (+ 3 4))))
+#'group/addition
+```
+
 ## 다른 네임스페이스에서 쓰지 못하게 하기
+
+네임스페이스에 정의 한 이름을 다른 네임스페이스에서 못쓰게하면 좋은 경우가 있다. 
+
+현재 네임스페이스에서만 사용하는 이름이라면 다른 네임스페이스에서 못쓰게 해두면 변경해야할 일이 생겼을 때 조금 안심할 수 있다.
+
+그렇지 않으면 다른 네임스페이스에서 어떤 문제가 생길지 알 수 없다.
+
+물론 테스트 코드를 잘 작성하면 되겠지만 그래도 불안하다.
+
+```clojure
+user=> (defn ^:private valid-name? [name]
+  #_=>   (string? name))
+user=> (ns group)
+nil
+group=> (require 'user)
+nil
+group=> (user/valid-name? "eunmin")
+
+CompilerException java.lang.IllegalStateException: var: #'user/valid-name? is not public, compiling:(NO_SOURCE_PATH:1:1)
+```
+
+사용법은 이름 앞에 `^:private`을 붙여주면 된다.
+
+함수를 만들어 이름을 연결하는 `defn`은 `^:private` 대신 `defn-`을 사용하면 간편한다.
+
+```clojure
+user=> (defn- valid-name? [name]
+  #_=>   (string? name))
+#'user/valid-name?
+```
+
+일반 값을 만들어 이름을 연결하는 `def`에는 `def-` 같은것을 제공하지 않는다.
+
+## 상호 참조되는 네임스페이스
+
 
 
 
