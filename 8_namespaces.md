@@ -1,16 +1,16 @@
 # 네임스페이스 - 정리중
 
-큰 프로그램에서는 많은 이름들이 사용되고 그러다 보면 이름이 겹치지 않게 하려고 이름을 길게 쓰게 된다.
+큰 프로그램에서는 많은 이름들이 사용되고 그러다 보면 이름이 겹치지 않게 하려고 이름을 길게 쓰게 된다. `user-name`, `group-name`과 같이 이름에 분류가 들어가기도 한다.
 
 많은 프로그래밍 언어에서는 이름을 카테고리로 분류 할 수 있는 네임스페이스 기능을 제공한다.
 
-네임스페이스는 이름을 정의 할 수 있는 구역과 그 구역에서 다른 이름을 가져다 쓸 수 있는 방법이 있어야 하는데 클로저에서 어떻게 네임스페이스를 사용하는지 알아본다.
+네임스페이스는 이름을 정의 할 수 있는 구역과 그 구역에서 다른 이름을 가져다 쓸 수 있는 방법이 있어야 하는데 클로저에서 어떻게 하는지 알아본다.
 
 ## 네임스페이스 정하기
 
-클로저에서 네임스페이스 구역을 정하는 방법은 `ns` 구문을 사용해서 이름을 정의하는 구역을 구분할 수 있다.
+클로저는 `ns` 구문을 사용해서 네임스페이스 구역을 정한다.
 
-REPL의 기본 네임스페이스는 `user`이기 때문에 지금까지는 `ns` 없이 이름을 만들었지만 모두 `user` 네임스페이스에 속한 이름이였다.
+REPL의 기본 네임스페이스는 `user`라서 지금까지는 `ns` 없이 이름을 만들었지만 모두 `user` 네임스페이스에 속한 이름이였다.
 
 ```clojure
 user=> (ns user)
@@ -43,19 +43,19 @@ REPL에서는 편의상 앞에 현재 네임스페이스를 표시해준다.
 
 `user=>`는 현재 네임스페이스가 `user`라는 뜻이다.
 
-예에서 `user` 네임스페이스에 `create` 함수를 만들고 다시 `(ns group)`으로 네임스페이스를 변경하고 `create` 함수를 만들었다.
+예에서는 `user` 네임스페이스에 `create` 함수를 만들고 다시 `(ns group)`으로 네임스페이스를 바꾸고 `create` 함수를 만들었다.
 
-같은 네임스페이스에서 `create` 함수를 다시 만들어 이름과 연결하면 기존에 연결된 이름은 연결이 끝어저 더 이상 접근할 수 없다. 
+같은 네임스페이스에서 `create` 이름의 함수를 다시 만들면 기존에 연결된 함수는 `create` 이름으로 접근할 수 없다.
 
-하지만 네임스페이스가 다른 두 공간에서 `create` 함수를 만들었기 때문에 `user` 네임스페이스 `create`와 `group` 네임스페이스에 `create`가 존재한다.
+하지만 네임스페이스가 다른 두 공간에서 `create` 함수를 만들었기 때문에 `user` 네임스페이스 `create`와 `group` 네임스페이스에 `create`를 각각 접근할 수 있다.
 
-참고고 위의 예에서 `str`은 문자열 변환 함수고 `gensym`은 심볼을 클로저가 자동으로 생성해주는 구문이다.
+참고고 위의 예에서 `str`은 문자열을 만드는 함수고 `gensym`은 심볼을 클로저가 자동으로 생성해주는 구문이다.
 
 ## 다른 네임스페이스에 있는 이름 사용하기
 
-현재 네임스페이스에서 다른 네임스페이스에 있는 이름을 사용하기 위해서는 다른 네임스페이스를 불러와야한다.
+현재 네임스페이스에서 다른 네임스페이스에 있는 이름을 사용하려면 다른 네임스페이스를 불러와야한다.
 
-`require` 구문은 다른 네임스페이스를 현재 네임스페이스에서 쓸 수 있게 해준다.
+`require` 구문으로 다른 네임스페이스를 현재 네임스페이스에서 쓸 수 있다.
 
 ```clojure
 group=> (require 'user)
@@ -75,7 +75,7 @@ group=> (create "clojure" (user/create "eunmin"))
 {:id "group15054", :name "clojure", :master {:id "user15053", :name "eunmin"}}
 ```
 
-`group` 네임스페이스에서 그룹을 생성하기 위해 `create`를 부르고 두번째 파라미터로 그룹장을 생성하기 위해 `user/create`를 불렀다.
+`group` 네임스페이스에서 그룹을 생성하기 위해 `create`를 부르고 두번째 파라미터로 그룹 리더를 생성하기 위해 `user/create`를 불렀다.
 
 ## 네임스페이스를 변경하면서 다른 네임스페이스를 사용하기
 
@@ -89,7 +89,7 @@ group=>
 
 `ns` 구분 뒤에 `(:require 네임스페이스심볼)`을 적어주면 된다.
 
-`ns`는 안에 있는 심볼들을 평가하지 않도록 하는 구문이기 때문에 안에 있는 네임스페이스에 `'` 표시해주지 않아도 된다.
+`ns`는 안에 있는 심볼들을 평가하지 않도록 하는 특수한 구문이기 때문에 안에 있는 네임스페이스에 `'` 표시해주지 않아도 된다.
 
 ## 네임스페이스 나누기
 
@@ -104,7 +104,7 @@ namespace-sample.handler.user=>
 ```
 
 첫 계층은 대부분 프로젝트 이름을 사용한다.
-자바 처럼 도메인을 뒤집어 사용하는 경우도 있지만 대부분 그냥 프로젝트 이름을 사용한다.
+자바 처럼 도메인을 뒤집어 사용하는 경우도 있지만 클로저에서는 대부분 그냥 프로젝트 이름을 사용한다.
 
 ## 네임스페이스와 파일명
 
@@ -230,6 +230,73 @@ user=> (defn- valid-name? [name]
 
 ## 상호 참조되는 네임스페이스
 
+클로저 파일들이 컴파일 될때 네임스페이스는 상호간 참조가 불가능하다.
+
+다음 파일을 보자.
+
+```clojure
+(ns circular-dependency-sample.user
+  (:require [circular-dependency-sample.group :as group]))
+
+(defn restricted? [user]
+  false)
+
+(defn create [name]
+  (when-not (group/find-member name)
+    {:id (str (gensym "user")) :name name}))
+```
+
+`circular-dependency-sample.user` 네임스페이스에서  `circular-dependency-sample.group`을 사용했다.
+
+```clojure
+(ns circular-dependency-sample.group
+  (:require [circular-dependency-sample.user :as user]))
+
+(defn find-member [name]
+  nil)
+
+(defn create [name user]
+  (when-not (user/restricted? user)
+    {:id (str (gensym "group")) :name name :leader user}))
+```
+
+그리고 `circular-dependency-sample.group` 네임스페이스에서 `circular-dependency-sample.user`를 사용했다.
+
+이런 경우 컴파일 될때 어떤 파일이 앞서 있어야 하는지 알지 못하기 때문에 컴파일 에러가 난다.
 
 
+```bash
+$ lein check
+Compiling namespace circular-dependency-sample.core
+Compiling namespace circular-dependency-sample.group
+Exception in thread "main" java.lang.Exception: Cyclic load dependency: [ /circular_dependency_sample/group ]->/circular_dependency_sample/user->[ /circular_dependency_sample/group ], compiling:(circular_dependency_sample/user.clj:1:1)
+	at clojure.core$throw_if.doInvoke(core.clj:5405)
+	at clojure.lang.RestFn.invoke(RestFn.java:442)
+	at clojure.core$check_cyclic_dependency.invoke(core.clj:5541)
+	at clojure.core$load.doInvoke(core.clj:5638)
+	at clojure.lang.RestFn.invoke(RestFn.java:408)
+	at clojure.core$load_one.invoke(core.clj:5446)
+	at clojure.core$load_lib$fn__5015.invoke(core.clj:5486)
+	at clojure.core$load_lib.doInvoke(core.clj:5485)
+	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+	at clojure.core$apply.invoke(core.clj:626)
+	at clojure.core$load_libs.doInvoke(core.clj:5524)
+	at clojure.lang.RestFn.applyTo(RestFn.java:137)
+	at clojure.core$apply.invoke(core.clj:626)
+	at clojure.core$require.doInvoke(core.clj:5607)
+	at clojure.lang.RestFn.invoke(RestFn.java:408)
+	at circular_dependency_sample.user$eval45$loading__4958__auto____46.invoke(user.clj:1)
+	at circular_dependency_sample.user$eval45.invoke(user.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:6703)
+	...
+```	
+
+이런 경우 다른 해결 방법은 없다. 
+
+결과적으로 이런 구조는 좋지 않기 때문에 사용하려고 하는 네임스페이스를 새로운 네임스페이스로 분리하는 등과 같은 방법으로 구조를 변경하는 것이 좋다. 
+
+
+## 그 밖에
+
+다른 네임스페이스를 사용하는 `use`라는 구문이 있지만 잘 사용하지 않는다.
 
