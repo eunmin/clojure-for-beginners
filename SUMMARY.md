@@ -9,5 +9,5 @@
 * [시퀀스](6_sequences.md)
 * [함수형 프로그래밍](7_functional.md)
 * [네임스페이스](8_namespaces.md)
-* 매크로
+* [매크로](9_macros.md)
 
