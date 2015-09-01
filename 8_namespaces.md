@@ -37,7 +37,7 @@ user=> create
 
 위 예에서 `(ns 심볼)`로 네임스페이스를 정해줬다.
 
-`(ns 심볼)` 이후에 생성한 Var는 모두 `user` 네임스페이스에 속한다. 
+`(ns user)` 이후에 생성한 Var는 모두 `user` 네임스페이스에 속한다.
 
 REPL에서는 편의상 앞에 현재 네임스페이스를 표시해준다. 
 
@@ -49,7 +49,7 @@ REPL에서는 편의상 앞에 현재 네임스페이스를 표시해준다.
 
 하지만 네임스페이스가 다른 두 공간에서 `create` 함수를 만들었기 때문에 `user` 네임스페이스 `create`와 `group` 네임스페이스에 `create`를 각각 접근할 수 있다.
 
-참고고 위의 예에서 `str`은 문자열을 만드는 함수고 `gensym`은 심볼을 클로저가 자동으로 생성해주는 구문이다.
+참고로 위의 예에서 `str`은 문자열을 만드는 함수고 `gensym`은 심볼을 클로저가 자동으로 생성해주는 구문이다.
 
 ## 다른 네임스페이스에 있는 이름 사용하기
 
@@ -72,7 +72,7 @@ nil
 group=> (user/create "eunmin")
 {:id "user15050", :name "eunmin"}
 group=> (create "clojure" (user/create "eunmin"))
-{:id "group15054", :name "clojure", :master {:id "user15053", :name "eunmin"}}
+{:id "group15054", :name "clojure", :leader {:id "user15053", :name "eunmin"}}
 ```
 
 `group` 네임스페이스에서 그룹을 생성하기 위해 `create`를 부르고 두번째 파라미터로 그룹 리더를 생성하기 위해 `user/create`를 불렀다.
