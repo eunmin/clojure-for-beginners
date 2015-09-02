@@ -269,3 +269,4 @@ user=> (macroexpand-1 '(code-greeting "eunmin"))
 `(code-greeting "eunmin")` 매크로는 `(str "Hi! I'm" "eunmin")`코드를 코드가 컴파일되기 전에 실행되서 코드로 바뀌고 그 코드가 컴파일되서 실행될때 `(str "Hi! I'm" "eunmin")`가 실행되서 "Hi! I'm eunmin"이라는 결과가 나온다.
 
 
+
