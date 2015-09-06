@@ -255,7 +255,7 @@ a type: clojure.lang.PersistentList
 
 하지만 처음에 이야기한것처럼 함수로 작성할 수 있다면 매크로보다 함수로 작성하는 것이 더 좋다.
 
-`(str "Hi! I'm " "eunmin")`이란 코드를 만드는 매크로를 만들어 보자.
+`(str "Hi! I'm " 입력 값)`형태의 코드를 만드는 매크로를 만들어 보자.
 
 `"eunmin"` 대신에 매크로에 파라미터를 받게 만들어보자.
 
@@ -267,6 +267,13 @@ user=> (macroexpand-1 '(code-greeting "eunmin"))
 ```
 
 `(code-greeting "eunmin")` 매크로는 `(str "Hi! I'm" "eunmin")`코드를 코드가 컴파일되기 전에 실행되서 코드로 바뀌고 그 코드가 컴파일되서 실행될때 `(str "Hi! I'm" "eunmin")`가 실행되서 "Hi! I'm eunmin"이라는 결과가 나온다.
+
+위 예에서 매크로의 결과가 코드가 되야하기 때문에 리스트에 코드를 담았다.
+
+리스트에 담지 않고 `(str "Hi! I'm" me)`라고 했다면 매크로의 결과가 코드 형태가 아닌 `str`의 결과 값이 된다.
+
+## 매크로 템플릿
+
 
 
 
