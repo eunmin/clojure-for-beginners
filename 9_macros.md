@@ -274,6 +274,6 @@ user=> (macroexpand-1 '(code-greeting "eunmin"))
 
 ## 매크로 템플릿
 
-
+매크로는 주로 코드를 리턴하기 때문에 먼저 봤던 예제 처럼 `list`에 
 
 
