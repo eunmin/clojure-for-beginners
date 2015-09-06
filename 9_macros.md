@@ -393,6 +393,56 @@ user=> (code-greeting "eunmin")
 
 ```표시로 만들었을 때는 안쪽의 코드가 기본적으로 평가되지 않고 `~`표시로 평가하도록 했다.
 
+## 매크로에서 심볼 사용하기
+
+위에서 본 것 처럼 ```표시로 매크로를 만들면 심볼앞에 네임스페이스가 붙는다.
+
+`let`구문에 `a`와 `b`를 만들어 더하는 코르를 생성하는 매크로를 만들어보자.
+
+```clojure
+(defmacro code-local-bind-add []
+  `(let [a 1 b 2] (+ a b)))
+```
+
+```bash
+user=> (macroexpand-1 '(code-local-bind-add))
+(clojure.core/let [user/a 1 user/b 2] (clojure.core/+ user/a user/b))
+user=> (code-local-bind-add)
+
+CompilerException java.lang.RuntimeException: Can't let qualified name: user/a, compiling:(NO_SOURCE_PATH:1:1) 
+```
+
+`user` 네임스페이스에서 매크로를 생성했기 때문에 `a`와 `b` 심볼은 `user/a`와 `user/b`로 대치되었다.
+
+하지만 `user` 네임스페이스에 `a`와 `b`가 없기 때문에 오류가 발생했다.
+
+이런 경우에 네임스페이스가 앞에 붙지 않도록 하기 위해 꼼수를 써야한다.
+
+이상하게 보이지만 `a`를 심볼 자체로 생성하기 위해 `'` 평가되지 않는 기호를 붙이고 그 앞에 또 다시 `~` 평가하게 하면 결국 `a` 심볼을 얻을 수 있다.
+
+```clojure
+(defmacro code-local-bind-add []
+ `(let [~'a 1 ~'b 2] (+ ~'a ~'b)))
+```
+이런 방법은 코드를 알아보기 힘들기 때문에 매크로 안에 심볼을 만들어 써야하는 경우 `심볼#`이라는 구문을 쓰면 겹치지 않는 심볼이 자동으로 생성된다.
+
+```clojure
+(defmacro code-local-bind-add []
+  `(let [a# 1 b# 2] (+ a# b#)))
+```
+
+```bash
+user=> (macroexpand-1 '(code-local-bind-add))
+(clojure.core/let [a__15173__auto__ 1 b__15174__auto__ 2] (clojure.core/+ a__15173__auto__ b__15174__auto__))
+user=> (code-local-bind-add)
+3
+```
+
+매크로가 만들어내는 코드를 보면 심볼 뒤에 알수 없는 기호를 붙여 새로운 심볼로 생성하는 것을 볼 수 있다.
+
+
+
+
 
 
 
