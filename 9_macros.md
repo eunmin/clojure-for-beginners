@@ -440,8 +440,29 @@ user=> (code-local-bind-add)
 
 매크로가 만들어내는 코드를 보면 심볼 뒤에 자동으로 만들어낸 글자를 붙여 새로운 심볼로 생성하는 것을 볼 수 있다.
 
+## 시퀀스 풀어 대치하기
 
+시퀀스 형태의 값을 순서대로 대치해주는 `~@심볼`라는 기호가 있다. 예를 들어 `[1 2 3]`이라는 값으로 들어오는 매크로의 파라미터가 있다면 `~@심볼`로 풀어서 `1 2 3`으로 대치해줄 수 있다.
 
+```clojure
+(defmacro code-fail-add [& args]
+  `(+ ~args))
+  
+(defmacro code-good-add [& args]
+  `(+ ~@args))
+```
+
+```bash
+user=> (macroexpand-1 '(code-fail-add 1 2 3))
+(clojure.core/+ (1 2 3))
+
+user=> (macroexpand-1 '(code-good-add 1 2 3))
+(clojure.core/+ 1 2 3)
+```
+
+## 다시 강조
+
+함수로 만들 수 있으면 매크로를 쓰지 말자!
 
 
 
