@@ -274,7 +274,108 @@ user=> (macroexpand-1 '(code-greeting "eunmin"))
 
 ## 매크로 템플릿
 
-매크로는 주로 코드를 리턴하기 때문에 먼저 봤던 예제 처럼 `list`에 코드를 넣어 리턴한다.
+매크로는 주로 코드를 리턴하기 때문에 먼저 봤던 예제 처럼 함수가 실행 되지 않게 하기 위해 `list`에 코드를 넣어 리턴한다.
+
+또 다른 방법은 `'`로 괄호 안에 있는 구문을 평가하지 않도록 해서 리턴할 수도 있다.
+
+`(+ 1 2)`라는 코드를 리턴하는 매크로를 `list`와 `'`표시로 만들어보자.
+
+```clojure
+(defmacro code-list-one-plus-two []
+  (list + 1 2))
+  
+(defmacro code-quote-one-plus-two []
+  '(+ 1 2))
+```
+
+```bash
+user=> (macroexpand-1 '(code-list-one-plus-two))
+(#<core$_PLUS_ clojure.core$_PLUS_@542aa3b8> 1 2)
+
+user=> (macroexpand-1 '(code-quote-one-plus-two))
+(+ 1 2)
+```
+
+먼저 매크로 코드는 `'`표시로 만든 매크로가 더 간단해보인다. 
+
+또 두번재로 만들어진 코드의 모양도 `list`로 만든 경우 `+`함수가 평가된 함수 값이 들어 있고 `'`표시로 만든 경우 `+` 평가되지 않고 `+` 심볼이 그대로 나온것을 볼 수 있다.
+
+이 예제에서 결과는 같지만 다른 경우에 이런 차이가 의도하지 않은 결과를 낼 수 있다.
+
+이번에는 `'`표시를 써서 앞서 만든 `code-greeting` 매크로를 만들어 보자.
+
+```clojure
+(defmacro code-greeting [me]
+  '(str "Hi! I'm " me))
+```
+
+```bash
+user=> (macroexpand-1 '(code-greeting "eunmin"))
+(str "Hi! I'm " me)
+user=> (code-greeting "eunmin")
+
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: me in this context, compiling:(NO_SOURCE_PATH:2:4) 
+user=> me
+
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: me in this context, compiling:(NO_SOURCE_PATH:0:0)
+```
+
+매크로의 결과 코드에서 예상한 `(str "Hi! I'm " "eunmin")` 대신 `(str "Hi! I'm " me)`가 나왔다.
+
+코드를 평가한 결과도 오류가 발생했다. 왜냐하면 `me`라는 심볼은 현재 네임스페이스에 없는 Var이기 때문이다.
+
+왜 이런 일이 발생한 건가?
+
+`'`표시는 안에 있는 모든 코드를 평가하지 않기 때문에 `me`값이 평가되지 않고 심볼 그대로 리턴이됬기 때문이다.
+
+이런 경우에는 처음에 만든 예제 처럼 `list`를 사용해야한다.
+
+하지만 클로저에 매크로 템플릿 기능을 사용하면 `list`를 사용하지 않고 깔끔하게 매크로를 작성할 수 있다.
+
+매크로 템플릿은 `'`표시와 비슷하지만 다른 ```표시를 코드 앞에 해주면 된다.
+
+다시 매크로 템플릿으로 `code-greeting`을 만들어 보자.
+
+```clojure
+(defmacro code-greeting [me]
+  `(str "Hi! I'm " me))
+```
+
+```bash
+user=> (macroexpand-1 '(code-greeting "eunmin"))
+(clojure.core/str "Hi! I'm " user/me)
+user=> (code-greeting "eunmin")
+
+CompilerException java.lang.RuntimeException: No such var: user/me, compiling:(NO_SOURCE_PATH:1:1) 
+```
+
+이번에도 `me`는 `"eunmin"`으로 평가되지 않았다.
+
+역시 마찬가지로 `me`를 현재 네임스페이스에 없기 때문에 오류가 발생한다.
+
+조금 다른 것은 `str`과 `me`와 같은 심볼 앞에 심볼이 있는 네임스페이스를 붙여 `clojure.core/str`, `user/me`와 같이 생성된 점이다.
+
+매크로 템플릿 안에 있는 심볼을 평가해 값으로 바꿀 수 있는 문법이 `~`표시다.
+
+심볼 앞에 `~`표시를 붙이면 평가되어 값으로 바뀐다.
+
+그럼 제대로 다시 만들어 보자.
+
+```clojure
+(defmacro code-greeting [me]
+  `(str "Hi! I'm " ~me))
+```
+
+```bash
+user=> (macroexpand-1 '(code-greeting "eunmin"))
+(clojure.core/str "Hi! I'm " "eunmin")
+user=> (code-greeting "eunmin")
+"Hi! I'm eunmin"
+```
+
+이제 `me`심볼이 값으로 바뀐 코드가 생성되었다.
+
+
 
 
 
