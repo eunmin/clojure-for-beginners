@@ -10,6 +10,5 @@
 * [함수형 프로그래밍](7_functional.md)
 * [네임스페이스](8_namespaces.md)
 * [매크로](9_macros.md)
-* 메타 데이터
-* 자바
+* [메타 데이터](10_metadata.md)
 
