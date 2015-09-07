@@ -455,6 +455,38 @@ user=> (macroexpand-1 '(code-good-add 1 2 3))
 (clojure.core/+ 1 2 3)
 ```
 
+## 클로저에서 제공하는 매크로
+
+클로저에서 제공하는 여러 가지 기능중 매크로로 지원하고 있는 것들이 많이 있다.
+
+먼저 함수값에 심볼을 바인딩하는 `defn`은 매크로다.
+
+```bash
+user=> (macroexpand-1 '(defn add [x y] (+ x y)))
+(def add (clojure.core/fn ([x y] (+ x y))))
+```
+
+생긴 모습이 조금 복잡해 보이지만 `ns`도 매크로다.
+
+```bash
+user=> (macroexpand-1 '(ns user))
+(do (clojure.core/in-ns (quote user)) (clojure.core/with-loading-context (clojure.core/refer (quote clojure.core))) (if (.equals (quote user) (quote clojure.core)) nil (do (clojure.core/dosync (clojure.core/commute (clojure.core/deref (var clojure.core/*loaded-libs*)) clojure.core/conj (quote user))) nil)))
+```
+
+조건 구문에 사용하는 `and`, `or`도 매크로다.
+
+```bash
+user=> (macroexpand-1 '(and true false))
+(clojure.core/let [and__3973__auto__ true] (if and__3973__auto__ (clojure.core/and false) and__3973__auto__))
+```
+
+심지어 `defmacro`도 매크로다.
+
+```bash
+user=> (macroexpand-1 '(defmacro code [] `(+ 1 2)))
+(do (clojure.core/defn code ([&form &env] (clojure.core/seq (clojure.core/concat (clojure.core/list (quote clojure.core/+)) (clojure.core/list 1) (clojure.core/list 2))))) (. (var code) (setMacro)) (var code))
+```
+
 ## 다시 강조
 
 매크로는 일반 코드가 평가되기 전에 먼저 실행되고 그 결과 코드는 일반 코드들과 함께 실행된다!
