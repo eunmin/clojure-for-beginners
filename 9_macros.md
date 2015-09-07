@@ -487,6 +487,10 @@ user=> (macroexpand-1 '(defmacro code [] `(+ 1 2)))
 (do (clojure.core/defn code ([&form &env] (clojure.core/seq (clojure.core/concat (clojure.core/list (quote clojure.core/+)) (clojure.core/list 1) (clojure.core/list 2))))) (. (var code) (setMacro)) (var code))
 ```
 
+클로저의 매크로들은 코드나 문서를 찾아보면 더 많이 있다.
+
+https://github.com/clojure/clojure/blob/clojure-1.7.0/src/clj/clojure/core.clj
+
 ## 다시 강조
 
 매크로는 일반 코드가 평가되기 전에 먼저 실행되고 그 결과 코드는 일반 코드들과 함께 실행된다!
