@@ -13,5 +13,5 @@
 * [메타데이터](10_metadata.md)
 * [자바](11_java.md)
 * [병렬 처리에서 데이터 공유](12_concurrency.md)
-* 좀 더 구조적으로 만들기
+* [좀 더 구조적으로 만들기](13_structural.md)
 
