@@ -57,5 +57,12 @@ user=> (max-value value)
 
 마지막에 `value`는 메타 데이터에 `sorted`를 `true`로 주고 함수를 실행해서 그냥 마지막 값인 `1`이 나왔다.
 
+# Var 메타데이터
+
+Var도 메타데이터를 담을 수 있다.
+
+```clojure
+
+
 
 
