@@ -114,8 +114,8 @@ ArityException Wrong number of args (1) passed to: calc/add  clojure.lang.AFn.th
 
 ```clojure
 (defmacro apply! [fn-name & args]
-  `(let [arglists# (first (:arglists (meta (var ~fn-name))))]
-     (when (= (count ~(vec args)) (count arglists#))
+  `(let [arglist# (first (:arglists (meta (var ~fn-name))))]
+     (when (= (count ~(vec args)) (count arglist#))
        (~fn-name ~@args))))
 ```
 
@@ -128,5 +128,9 @@ nil
 
 예제를 살펴보면 첫번째 `let` 구문에서 함수 이름(심볼)에 대한 Var를 `var`함수를 통해 가져와서 `meta` 함수로 Var에 대한 메타데이터를 가져와서 그중 `:arglists`키로 인자 목록을 가져온다.
 
-여기서 `first`가 적용되어 있는데 
+여기서 `first`가 적용되어 있는데 함수는 오버로딩 될수 있기 때문에 시그네쳐(인자가 다른것)가 여러개 있을 수 있다. 위 예제는 그냥 `first`라고 해서 첫번째 시그네쳐만 가져오도록 되어있어 오버로딩된 함수는 정상적으로 동작하지 않는 문제가 있다. 이 부분은 과제로 남겨둔다.
+
+최종적으로 `args`의 개수와 `arglist`의 개수를 비교해 같은 경우만 함수를 실행하도록 하는 매크로다.
+
+
 
