@@ -4,7 +4,7 @@
 
 자바에 있는 어노테이션과 같은 목적의 기능이지만 어노테이션 보다 더 많은 데이터를 담을 수 있기 때문에 다양한 방법으로 활용할 수 있다.
 
-클로저는 Var와 컬랙션 데이터에 메타데이터를 담을 수 있다.
+클로저는 심볼과 컬랙션 데이터에 메타데이터를 담을 수 있다.
 
 ## 메타데이터 담기
 
@@ -120,9 +120,9 @@ ArityException Wrong number of args (1) passed to: calc/add  clojure.lang.AFn.th
 ```
 
 ```bash
-user=> (add 1 2)
+user=> (apply! add 1 2)
 3
-user=> (add 1)
+user=> (apply! add 1)
 nil
 ```
 
@@ -132,5 +132,64 @@ nil
 
 최종적으로 `args`의 개수와 `arglist`의 개수를 비교해 같은 경우만 함수를 실행하도록 하는 매크로다.
 
+## Var 메타데이터에 데이터 추가하기
 
+처음 알아본 시퀀스에 메타데이터를 추가한 것처럼 Var에도 메타데이터를 추가할 수 있다.
 
+```clojure
+(defn ^{:default 0} add [x y]
+  (+ x y))
+```
+
+```bash
+user=> (meta #'add)
+{:default 0, :arglists ([x y]), :line 3, :column 1, :file ".../src/metadata_sample/core.clj", :name add, :ns #object[clojure.lang.Namespace 0x6c454d91 "metadata-sample.core"]}
+```
+
+`var`의 간단한 문법(리더메크로)인 `#'`를 사용했다.
+
+메타데이터를 가져온 맵에 보면 `:default` 값이 0으로 추가되어 있는 것을 볼 수 있다.
+
+마지막 예제로 방금 추가한 메타데이터인 `:default`를 이용해 먼저 작성한 `apply!`에서 인자의 개수가 맞지 않을 때 `:default` 값을 출력하도록 해보자.
+
+```clojure
+(defmacro apply! [fn-name & args]
+  `(let [metadata# (meta (var ~fn-name))
+         arglists# (first (:arglists metadata#))]
+     (if (= (count ~(vec args)) (count arglists#))
+       (~fn-name ~@args)
+       (:default metadata#))))
+```
+
+먼저 예제에서 사용했던 `when` 대신 `if`를 사용해 인자의 개수가 다른 경우 메타데이터에 있는 `:default` 키 값을 리턴하도록 수정했다.
+
+```bash
+user=> (apply! add 1 2)
+3
+user=> (apply! add 1)
+0
+```
+
+## true 값을 가지는 메타데이터
+
+위에서 본것 처럼 메타데이터는 어떤 값도 가질 수 있다. 보통 메타데이터에 `true` 값을 자주 사용하기 때문에 `true` 값을 가지는 메타데이터를 간편하게 줄 수 있는 문법이 있다.
+
+```bash
+user=> (def ^:dynamic *system*)
+#'user/*system*
+user=> (meta #'*system*)
+{:dynamic true, :line 1, :column 1, :file ...
+```
+
+위의 예처럼 `^키워드`형태로 메타데이터를 추가하면 해당 키에 `true` 값을 가지는 메타데이터가 추가된다.
+
+여러개 추가도 가능하다.
+
+```bash
+user=> (def ^:dynamic ^:private *system*) 
+#'user/*system*
+user=> (meta #'*system*)
+{:private true, :dynamic true, :line 1, :column 1, :file ...
+```
+
+메타데이터에 대해서 간단히 알아봤고 클로저에서는 메타데이터에 대한 몇가지 함수들을 더 제공하는데 이것들은 문서를 참고 하자.
