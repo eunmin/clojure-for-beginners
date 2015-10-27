@@ -46,7 +46,6 @@ user=> (meta numbers)
 동작을 확인해보면 아래와 같다.
 
 ```bash
-
 user=> (max-value [1 9 3 2 3 4 5])
 9
 user=> (def value ^{:sorted true} [2 3 4 5 9 3 1])
