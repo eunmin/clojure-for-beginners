@@ -335,17 +335,9 @@ true
 
 ## 심볼(Symbol)
 
-그냥 문자들은 심볼 데이터이고 보통 이름으로 사용한다.
+그냥 문자들은 심볼 데이터이고 평가되면 연결된 값으로 바꾸는 동작을 하기 때문에 보통 이름으로 사용한다.
 
-REPL에서 심볼은 평가하려고 하기 때문에 그냥 아무 문자나 쓰고 엔터를 누르면 예외가 발생한다.
-
-```clojure
-user=> a
-
-CompilerException java.lang.RuntimeException: Unable to resolve symbol: a in this context, compiling:(NO_SOURCE_PATH:0:0)
-```
-
-REPL에서 평가되지 않게 하려면 리스트처럼 `'`를 앞에 붙여 주면 된다.
+역시 평가되지 않게 하려면 리스트처럼 `'`를 앞에 붙여 주면 된다.
 
 ```clojure
 user=> 'a
