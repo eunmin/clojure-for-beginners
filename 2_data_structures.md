@@ -340,6 +340,8 @@ true
 역시 평가되지 않게 하려면 리스트처럼 `'`를 앞에 붙여 주면 된다.
 
 ```clojure
+user=> println
+#object[clojure.core$println 0xbb97215 "clojure.core$println@bb97215"]
 user=> 'a
 a
 ```
@@ -357,16 +359,6 @@ user=> '더하기
 ## 함수(Function)
 
 함수도 값이다.
-
-```clojure
-user=> println
-#object[clojure.core$println 0xbb97215 "clojure.core$println@bb97215"]
-```
-
-```clojure
-user=> ((:add {:add +}) 2 3)
-5
-```
 
 
 
