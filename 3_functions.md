@@ -24,6 +24,39 @@ user=> (+ (+ 1 2) 3)
 6
 ```
 
+리스트에 첫번째 항목이 함수로 실행된다는 점은 아래 C코드 예를 보면 더 쉽게 이해할 수 있다. 아래 예제는 함수와 인자를 배열에 넣고 첫번째 배열에 들어있는 함수를 실행하는 코드다.
+
+```c
+#include <stdio.h>
+
+typedef int (fn) (int, int);
+
+int add(int x, int y) {
+  return x + y;
+}
+
+int multi(int x, int y) {
+  return x * y;
+}
+
+int eval_int_int_int(void **code) {
+  return (*(fn*)code[0])(*(int*)code[1], *(int*)code[2]);
+}
+
+int main() {
+
+  int x = 2;
+  int y = 3;
+  void *code1[] = {&add, &x, &y};
+  void *code2[] = {&multi, &x, &y};
+
+  printf("add : %d\n", eval_int_int_int(code1));
+  printf("multi : %d\n", eval_int_int_int(code2));
+  
+  return 0;
+}
+```
+
 ## 함수 만들기
 
 새로운 함수 값을 만드는 방법은 `fn`이라는 구문으로 만든다.
