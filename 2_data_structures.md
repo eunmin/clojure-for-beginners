@@ -354,6 +354,19 @@ user=> '더하기
 심볼은 값에 바인딩되어 값의 이름으로 사용될 수 있다.
 
 
+## 함수(Function)
+
+함수도 값이다.
+
+```clojure
+user=> println
+#object[clojure.core$println 0xbb97215 "clojure.core$println@bb97215"]
+```
+
+```clojure
+user=> ((:add {:add +}) 2 3)
+5
+```
 
 
 
