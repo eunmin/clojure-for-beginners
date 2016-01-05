@@ -49,7 +49,7 @@ nil
 user=>
 ```
 
-클로저는 REPL에서 바로 실행할 수도 있지만 주로 자바와 같이 컴파일해서 실행하기 때문에 컴파일 해서 실행하는 방법을 알아보자.
+클로저는 REPL에서 바로 실행할 수도 있지만 자바 클래스 파일로 컴파일해서 실행할 수 있다.  컴파일 해서 실행하는 방법을 알아보자.
 
 ### 파일에 작성된 코드를 컴파일 해서 실행하기
 
@@ -58,7 +58,8 @@ user=>
 ```clojure
 (ns example.hello (:gen-class))
 
-(defn -main [] (println "Hello World"))
+(defn -main [] 
+  (println "Hello World"))
 ```
 
 뭐가 뭔지 모르겠지만 중간에 `(println "Hello World")`가 보인다.
@@ -70,6 +71,7 @@ user=>
 컴파일을 위해 다시 REPL을 실행한다. REPL을 실행할 때 처음과 다른 부분이 있는데 소스파일을 찾기위해 현재 디렉토리를 클래스 패스로 추가해주는 부분이 있다.
 
 ```bash
+mkdir classes
 java -cp .:clojure-1.7.0.jar clojure.main
 Clojure 1.7.0
 user=> (compile 'example.hello)
