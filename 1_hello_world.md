@@ -160,6 +160,61 @@ lein run -m hello.core
 Hello World
 ```
 
+#### lein으로 컴파일하기
+
+Leiningen은 컴파일 및 패키징 기능도 제공한다.
+
+`lein`은 서버 커맨드로 `compile`, `jar`, `uberjar`를 제공하고 있다.
+
+`compile`은 소스 디렉토리로 지정된 곳에 있는 클로저 파일들을 컴파일해준다.
+
+`jar`는 파일들을 jar로 묶어준다.
+
+`uberjar`는 의존하고 있는 jar들과 함게 jar로 묶어준다.
+
+기본적으로 `jar`와 `uberjar` 패키징 커맨드는 컴파일을 하지 않고 `clj`파일을 jar로 묶는다.
+클로저의 라이브러리들은 `jar`로 Clojars 같은 곳으로 배포가 되는데 보통 소스 파일(`clj`)형태로 
+묶어 배포를 한다. 그리고 라이브러리를 사용하는 어플리케이션에서 소스파일을 컴파일해서 클래스 형태로 
+만든다. 클래스로 배포하지 않는 이유는 자바의 버전 문제등 여러가지 문제에 더 자유롭기 때문일 것이다.
+
+패키징시 클로저 소스파일을 컴파일 하기 위해서는 `project.clj`에 설정을 추가해줘야한다.
+
+```clojure
+:profiles {:uberjar {:aot :all}}
+```
+
+을 추가한다. Leiningen은 lein 명령어를 실행하는 환경별로 다른 설정을 줄 수 있도록 하는 `profile`이라는 기능을 제공한다.
+
+위 설정은 `uberjar` 프로필로 실행되는 `lein`명령어에 `:aot :all` 옵션을 추가한 것이다.
+모든 소스파일을 컴파일 해서 클래스로 만드라는 옵션이다.
+
+```clojure
+(ns hello.core
+  (:gen-class)
+
+(defn -main [] (println "Hello World"))
+```
+
+기존 코드에 `:gen-class` 옵션을 추가해 자바 엔트리 포인트를 만들어 주고 아래와 같이 패키징을 해보자.
+
+```bash
+$lein uberjar
+Compiling hello.core
+Created ..../hello/target/hello-0.1.0-SNAPSHOT.jar
+Created ..../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
+```
+
+`jar`와 `standalone` `jar`가 생겼다. 그냥 `lein jar`는 위에 있는 `jar`만 생긴다. 
+위에 있는 `jar`는 실행할 때 의존하고 있는 다른 클래스들을 클래스패스에 추가하고 실행해야한다.
+`standanlone` `jar`는 의존하고 있는 클래스를 모두 포함하고 있어 크기는 크지만 독립적으로 실행 가능하다.
+
+```bash
+$ java -cp target/hello-0.1.0-SNAPSHOT-standalone.jar hello.core
+Hello World
+```
+
+실행 결과가 잘 나오는 것을 볼 수 있다.
+
 ## 지금 한 일 설명
 
 ### Hello World 코드의 모양
