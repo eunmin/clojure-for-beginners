@@ -79,15 +79,6 @@ nil
 
 ## 함수값과 Var
 
-함수값도 Var를 만들어 심볼로 참조할 수 있다.
-
-```clojure
-user=> (def add (fn [x y] (+ x y)))
-#'user/add
-user=> (add 1 2)
-3
-```
-
 함수값을 Var로 연결하는 일은 자주 일어나기 때문에 `defn` 구문을 쓰면 코드가 간단해진다.
 
 ```clojure
@@ -95,6 +86,19 @@ user=> (defn add [x y] (+ x y))
 #'user/add
 user=> (add 1 2)
 3
+```
+
+`defn` 구문도 docstring을 넣을 수 있다. 
+
+```clojure
+user=> (defn add "Add function" [x y] (+ x y))
+#'user/add
+user=> (doc add)
+-------------------------
+user/add
+([x y])
+  Add function
+nil
 ```
 
 ## 값으로 동작하는 함수
