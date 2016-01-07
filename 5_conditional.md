@@ -204,7 +204,7 @@ user=> (if (zero? 1) 1 2)
 
 (defn url [conf]
   (str "http://" (:host conf)
-    (when (not= http-default-port (:port conf))
+    (when-not (= http-default-port (:port conf))
       (str ":" (:port conf)))))
 
 (url (:production config))
