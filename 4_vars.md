@@ -73,16 +73,14 @@ nil
 
 ## let
 
-Var의 범위는 전역 스코프를 가진다.
+Var의 범위는 전역 스코프를 가진다. 이것을 Root Var라고 한다.
 
 ```clojure
 user=> (def x 1)
 #'user/x
 user=> (def y 2)
 #'user/y
-user=> (defn add [] (+ x y))
-#'user/add
-user=> (add)
+user=> (+ x y)
 3
 ```
 
@@ -145,9 +143,9 @@ user=> *a*
 1
 ```
 
-## 전역 Var를 동적으로 다시 바인딩하기
+## Root Var를 동적으로 다시 바인딩하기 (잠간 함수가 나옴 -_-)
 
-`binding` 구문은 지역적으로 Var를 다시 연결 하는 기능을 하지만 전역 Var을 동적으로 다시 바인딩 하려면 `alter-var-root` 함수를 사용한다.
+`binding` 구문은 지역적으로 Var를 다시 연결 하는 기능을 하지만 Root Var을 동적으로 다시 바인딩 하려면 `alter-var-root` 함수를 사용한다.
 
 
 ```clojure
@@ -171,7 +169,8 @@ user=> a
 
 클로저는 함수형 프로그래밍 스타일에 따라 대부분 값을 변경되지 않는 스타일을 사용하기 때문에 `alter-var-root`를 변수 처럼 사용하는 일은 없어야한다.
 
-만약 스레드를 사용해 데이터처리를 병렬로 해야한다면 어쩔수 없이 값을 변경하고 공유해야하는 일이 생기는데 이때는 클로저에서 안전하게 값을 변경할 수있도록 제공하는 기능들을 사용하면 된다. (나중에 다룸)
+참고로 `alter-var-root`는 내부적으로 `synchronized`되어 있다.
+(https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Var.java#L302)
 
 ### 덤
 
