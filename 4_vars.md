@@ -111,38 +111,12 @@ user=> (def x 1)
 #'user/x
 user=> (def y 2)
 #'user/y
-user=> (defn add [] (let [x 3 y 4] (+ x y)))
-#'user/add
-user=> (add)
+user=> (let [x 3 y 4] (+ x y))
 7
 user=> x
 1
 user=> y
 2
-```
-
-함수 파라미터 벡터에 있는 심볼도 Var가 생성되지 않고 지역적인 스코프를 가지는 연결을 만든다.
-
-```clojure
-user=> (defn add [x y] (+ x y))
-#'user/add
-user=> (add 1 2)
-3
-user=> x
-
-CompilerException java.lang.RuntimeException: Unable to resolve symbol: x in this context, compiling:(NO_SOURCE_PATH:0:0) 
-user=> y
-
-CompilerException java.lang.RuntimeException: Unable to resolve symbol: y in this context, compiling:(NO_SOURCE_PATH:0:0) 
-```
-
-파라미터 심볼과 같은 이름의 심볼이 `let` 구문에 연결되었다면 파라미터 심볼도 가려진다.
-
-```clojure
-user=> (defn add [x y] (let [x 0 y 0] (+ x y)))
-#'user/add
-user=> (add 1 2)
-0
 ```
 
 ## Dynamic Vars
