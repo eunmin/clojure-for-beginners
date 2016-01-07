@@ -38,26 +38,6 @@ user=> a
 2
 ```
 
-## 함수값과 Var
-
-함수값도 Var를 만들어 심볼로 참조할 수 있다.
-
-```clojure
-user=> (def add (fn [x y] (+ x y)))
-#'user/add
-user=> (add 1 2)
-3
-```
-
-함수값을 Var로 연결하는 일은 자주 일어나기 때문에 `defn` 구문을 쓰면 코드가 간단해진다.
-
-```clojure
-user=> (defn add [x y] (+ x y))
-#'user/add
-user=> (add 1 2)
-3
-```
-
 ## Docstrings
 
 Var는 연결된 값에 대한 설명을 넣을 수 있는 기능이 있다.
