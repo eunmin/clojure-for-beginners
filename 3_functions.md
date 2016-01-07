@@ -132,38 +132,49 @@ user=> (add 1 2)
 함수는 값이기 때문에 함수에 파라미터로 전달 할 수 있다.
 
 ```clojure
-user=> ((fn [f] (f 1 2)) (fn [x y] (+ x y)))
+user=> (defn apply-one-two [f] (f 1 2))
+#'user/apply-one-two
+user=> (defn add [x y] (+ x y))
+#'user/add
+user=> (apply-one-two add)
 3
-user=> ((fn [f] (f 1 2)) (fn [x y] (* x y)))
-2
 ```
 
-위의 예제는 함수 받고 그 함수에 1과 2를 전달한 결과를 출력하는 함수에 
+위의 예제는 어떤 함수인지 모르지만 함수를 하나 받아 1과 2를 넘겨 실행하는 `apply-one-two` 함수를 만들었다.
 
-첫번째는 두 값을 더하는 함수를 파라미터로 넘기고 두번째는 두 값을 곱하는 함수를 파리미터로 전달 했다.
+그리고 `x`와 `y`를 받아 더해주는 `add`도 만들었다.
+
+최종적으로 `apply-one-two` 함수에 `add`를 넘겨 결과를 출력해줬다.
 
 함수는 값이기 때문에 리턴 값으로 사용할 수 있다.
 
 ```clojure
-user=> (((fn [] (fn [x] (+ x 1)))) 1)
+user=> (defn increase [x] (+ x 1))
+#'user/increase
+user=> (defn get-increase-function [] increase)
+#'user/get-increase-function
+user=> ((get-increase-function) 1)
 2
 ```
-위 예제는 파라미터 하나를 받아 1을 더하는 함수를 리턴하는 함수를 부른 결과 함수에 1을 파라미터로 넘겨 실행하는 예제다.
+
+위 예제는 파라미터 하나를 받아 1을 더하는 `increase` 함수와 `incease` 함수를 리턴하는 `get-increase-function`을 만들고 `get-incease-function`를 평가한 결과(`increase` 함수) 에 `1`을 넘겨 `2`라는 결과를 얻었다. 
 
 ## Closure
 
 함수에 파라미터 값을 사용하는 함수를 리턴해도 그 파라미터가 유지된다.
 
 ```clojure
-user=> (((fn [y] (fn [x] (+ x y))) 2) 1)
+user=> (defn add [x] (fn [y] (+ x y)))
+#'user/add
+user=> ((add 1) 2)
 3
 ```
 
-위 예제는 `y`를 인자로 받아 인자로 받은 값과 리턴되는 함수의 인자인 `x`값을 더하는 함수로 
-
-`y`를 받은 함수에 2를 넣어 2와 파라미터값 `x`를 더하는 함수를 리턴한 결과 함수에 1을 넣어 결과 3을 얻은 예제다. 
-
+위 예제는 `x`를 인자로 받아 `y`를 인자로 받아 `x`와 `y`를 더하는 함수인 `add` 함수를 만들었다.
+ 
 여기서 `y`값은 일반 함수 처럼 함수가 종료되고 나서 사라지지 않고 결과 함수가 사용되는 곳에서 계속 유지된다.
+
+위 예제는 커링 예제다. 커링이란 파라미터를 여러개 받을 수 있는 함수만드는 방법이다.
 
 ## 가변 인자를 받는 함수
 
