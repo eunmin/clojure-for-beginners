@@ -64,6 +64,15 @@ user=>
 
 뭐가 뭔지 모르겠지만 중간에 `(println "Hello World")`가 보인다.
 
+주의할점이 하나 있는데 만약 `example`이라는 이름 대신 `-`와 같이 자바 클래스명 또는 패키지명에서 지원하지 않는 문자가 있다면 다른 문자로 대치해서 작성해야한다.
+(http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-JavaLetter)
+
+예를 들어 `example` 대신 `clojure-example`이라고 만드려면 `clojure_example`이라고 디렉토리를 만들어야한다.
+
+다른 문자들은 아래 코드를 참조하면 된다.
+
+https://github.com/clojure/clojure/blob/bfe14aec1c223abc3253358bac34b503284467d9/src/jvm/clojure/lang/Compiler.java#L2819
+
 #### 컴파일 하기
 
 먼저 받은 Clojure JAR에는 컴파일 기능이 들어있다. 하지만 컴파일러를 별도의 바이너리로 제공하지는 않고 함수 형태로 제공한다. 따러서 REPL이나 다른 프로그램에서 컴파일 함수를 호출해줘야한다. 
