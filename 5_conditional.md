@@ -138,6 +138,45 @@ user=> (let [limit (or (:limit params) 50)] limit)
 50
 ```
 
+## 조건문은 함수 인가?
+
+다음은 조건이 참이면 `참`을 출력하고 조건이 거짓이면 `거짓` 을 출력하는 함수다.
+
+```clojure
+(defn print-bool [bool]
+  (if bool (println "참") (println "거짓")))
+  
+user=> (print-bool true)
+참
+nil
+user=> (print-bool false)
+거짓
+nil  
+```
+
+만약 `if`가 함수라면 함수를 평가하는 동작 처럼 안쪽에 있는 구문들이 순서대로 실행되어야 하고 그렇다면 `참`과 `거짓` 모두 출력 되어야 한다.
+
+`if`를 다음과 같이 `my-if`라고 만들어보자.
+
+```clojure
+(defn my-if [condition true-form false-form]
+  (if condition
+    true-form
+    false-form))
+    
+user=> (my-if (= 1 1) (println "참" (println "거짓))
+참
+거짓
+nil
+```
+
+기본적인 함수의 동작과 같이 `참`과 `거짓` 모두 출력되었다.
+
+이것은 `if`라는 구문이 일반적인 함수가 아니라는 뜻이다. 
+실제로 `if` 구문은 클로저의 매크로라고 하는 기능으로 구현 되어 있고 매크로로 `my-if`를 구현할 수 있다. 
+
+매크로는 뒤에서 다룬다.
+
 ## if-let
 
 아래는 `get-user`라는 함수로 가져온 값을 `user`에 로컬 바인딩하고 `user`값이 있으면 `:id`값을 리턴하고 없으면 "user not found"라는 문자열을 리턴하는 예제다.
