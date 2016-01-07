@@ -209,5 +209,9 @@ user=> (sum 1 2 3)
 ArityException Wrong number of args (3) passed to: user/sum  clojure.lang.AFn.throwArity (AFn.java:429)
 ```
 
+## 패턴매칭은 없는가?
+
+클로저의 multimethod를 이용하면 패턴매칭 처럼 사용할 수 있다.
+
 
 
