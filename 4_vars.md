@@ -59,19 +59,7 @@ user/a
 nil
 ```
 
-함수값도 역시 설명을 넣을 수 있다. 
-
-```clojure
-user=> (def add "Add function" (fn [x y] (+ x y)))
-#'user/add
-user=> (doc add)
--------------------------
-user/add
-  Add function
-nil
-```
-
-클로저 제공하는 함수는 docstring을 가지고 있기 때문에 사용법등을 보려면 `doc` 함수에 심볼을 넘기면 된다.
+클로저 제공하는 함수는 docstring을 가지고 있기 때문에 사용법을 보려면 `doc` 함수에 심볼을 넘기면 된다.
 
 ```clojure
 user=> (doc +)
@@ -80,19 +68,6 @@ clojure.core/+
 ([] [x] [x y] [x y & more])
   Returns the sum of nums. (+) returns 0. Does not auto-promote
   longs, will throw on overflow. See also: +'
-nil
-```
-
-`defn` 구문도 같은 형식으로 docstring을 넣을 수 있다. 
-
-```clojure
-user=> (defn add "Add function" [x y] (+ x y))
-#'user/add
-user=> (doc add)
--------------------------
-user/add
-([x y])
-  Add function
 nil
 ```
 
