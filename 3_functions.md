@@ -183,11 +183,13 @@ user=> ((add 1) 2)
 가변 인자로 사용된 마지막 인자는 벡터로 넘어온다. 넘기지 않는다면 `nil`이 넘어온다.
 
 ```clojure
-user=> ((fn [x & y] y) 1)
+user=> (defn get-ys [x & y] y)
+#'user/get-ys
+user=> (get-ys 1)
 nil
-user=> ((fn [x & y] y) 1 2)
+user=> (get-ys 1 2)
 (2)
-user=> ((fn [x & y] y) 1 2 3)
+user=> (get-ys 1 2 3)
 (2 3)
 ```
 
@@ -196,13 +198,15 @@ user=> ((fn [x & y] y) 1 2 3)
 가변인자 함수는 인자 개수가 명시적이지 않기 때문에 정해진 갯수의 인자를 제공하는 함수의 경우에는 함수 오버로딩을 사용하는 것이 좋다.
 
 ```clojure
-user=> ((fn ([x] x) ([x y] (+ x y))) 1)
+user=> (defn sum ([x] x) ([x y] (+ x y)))
+#'user/sum
+user=> (sum 1)
 1
-user=> ((fn ([x] x) ([x y] (+ x y))) 1 2)
+user=> (sum 1 2)
 3
-user=> ((fn ([x] x) ([x y] (+ x y))) 1 2 3)
+user=> (sum 1 2 3)
 
-ArityException Wrong number of args (3) passed to: user/eval15184/fn--15185  clojure.lang.AFn.throwArity (AFn.java:429)
+ArityException Wrong number of args (3) passed to: user/sum  clojure.lang.AFn.throwArity (AFn.java:429)
 ```
 
 
