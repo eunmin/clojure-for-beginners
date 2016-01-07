@@ -173,9 +173,12 @@ nil
 기본적인 함수의 동작과 같이 `참`과 `거짓` 모두 출력되었다.
 
 이것은 `if`라는 구문이 일반적인 함수가 아니라는 뜻이다. 
-실제로 `if` 구문은 클로저의 매크로라고 하는 기능으로 구현 되어 있고 매크로로 `my-if`를 구현할 수 있다. 
 
-매크로는 뒤에서 다룬다.
+`if` 구문은 클로저 컴파일러가 특별하게 처리하도록 다루고 있는 Special 폼이기 때문에 함수와는 다르게 동작한다. `if` 외에 `def`, `let`, `fn`와 같은 구문들도 Special 폼이다.(http://clojure.org/special_forms#Special Forms)
+
+`if` 문은 다음과 같이 구현되어 있다.
+
+https://github.com/clojure/clojure/blob/bfe14aec1c223abc3253358bac34b503284467d9/src/jvm/clojure/lang/Compiler.java#L2694
 
 ## if-let
 
