@@ -58,6 +58,11 @@
 
 8. 아래와 같은 파일을 만들어 `config.edn`으로 저장하고 `config.edn`안에 있는 `:name`을 출력하는
    프로그램을 작성하시오.
+
+   ```clojure
+   {:name "clojure" :author "Rich Hickey"}
+   ```
+   
    - 힌트1 : 파일을 읽어 문자열로 리턴해주는 `slurp` 함수가 있습니다.
     ```clojure
     user=> (slurp "config.txt")
@@ -70,3 +75,4 @@
     user=> (class (read-string "{:name \"eunmin\"}"))
     clojure.lang.PersistentArrayMap
     ```
+    
