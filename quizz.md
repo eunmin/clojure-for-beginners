@@ -76,3 +76,13 @@
     clojure.lang.PersistentArrayMap
     ```
     
+9. `id`(숫자), `name`(문자열), `age`(숫자), `role`(키워드, 종류는 `:developer`, `:manager`, `:designer`, `:tester`)을 
+   데이터로 하는 사용자 데이터라고 하는 맵으로 만들어 출력하시오.
+
+10. 9에서 만든 사용자 데이터를 여러개 가질 수 있는 `users`라는 백터를 만들어 사용자 여러명을 넣어 데이터를 만들어 출력하시오.
+
+11. 10에서 만든 `users` 벡터에서 개발자의 나이를 합산하는 `sum-developer-age` 함수를 만들어보시오.
+
+12. 10에서 만든 `users` 벡터에 마지막에 사용자를 추가하는 `add-user`라는 함수를 만들어 보시오.
+
+13. 10에서 만든 users 벡터에 특정 id 사용자를 삭제하는 `remove-user`라는 함수를 만들어 보시오.
