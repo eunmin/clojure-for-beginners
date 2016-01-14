@@ -16,5 +16,5 @@
 * [좀 더 구조적으로 만들기](13_structural.md)
 * [간단한 웹 사이트 예제](14_website_example.md)
 * [다루지 않은 부분](15_not_covered.md)
-* [문제](quizz.md)
+* [연습문제](quizz.md)
 
