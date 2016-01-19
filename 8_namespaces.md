@@ -58,6 +58,8 @@ REPL에서는 편의상 앞에 현재 네임스페이스를 표시해준다.
 `require` 구문으로 다른 네임스페이스를 현재 네임스페이스에서 쓸 수 있다.
 
 ```clojure
+user=> (ns user)
+nil
 group=> (require 'user)
 nil
 ```
@@ -227,6 +229,25 @@ user=> (defn- valid-name? [name]
 ```
 
 `def`는 `def-` 같은 것을 제공하지 않는다.
+
+private 네임스페이스로 정의되어 있다고 하더라도 사실 접근할 수 있는 방법이 있다. 
+
+Var로 값에 접근하는 경우 private Var도 참조할 수 있다. 주로 private Var를 테스트하는 데 사용한다.
+
+```clojure
+user=> (def ^:private a 1)
+#'user/a
+user=> (defn- add [x y] (+ x y))
+#'user/add
+user=> (ns group)
+nil
+group=> (require 'user)
+nil
+group=> @#'user/a
+1
+group=> (#'user/add 1 2)
+3
+```
 
 ## 상호 참조되는 네임스페이스
 
