@@ -95,3 +95,11 @@
 
 17. `example.util.string` 네임스페이스에 특정 문자의 위치를 찾는 `index-of` 함수를 만들고 
     `example.core` ``-main` 함수에서 "Hello World"에서 공백 문자를 찾는 예제를 작성하라.
+
+18. Jedis 자바 라이브러리를 이용해 Redis에서 get/set 하는 클라이언트 프로그램을 작성하시오. 
+  - 힌트 : 자바 라이브러리를 사용하기 위해 `project.clj`에 `:dependencies` 키에 `[redis.clients/jedis "2.8.0"]`를 추가해준다.
+  - 힌트 : Jedis 사용법은 https://github.com/xetorthio/jedis 를    참조
+  - 힌트 : `lein run set 키 값` 또는 `lein run get 키`로 사용할 수 있도록 만든다.
+   
+
+ 
