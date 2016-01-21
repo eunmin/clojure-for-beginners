@@ -101,6 +101,14 @@
   - 힌트 : Jedis 사용법은 https://github.com/xetorthio/jedis 를    참조
   - 힌트 : `lein run set 키 값` 또는 `lein run get 키`로 사용할 수 있도록 만든다.
    
+19. 쓰레드를 생성해서 바인딩하는 `defthread` 매크로를 작성하라. `defthread`는 다음과 같이 사용한다.
+  
+  ```clojure
+  (defthread t1
+      (println (.getName (Thread/currentThread))))
 
+  (.start t1)
+  ;; => Thread-0
+  ```
 
  
