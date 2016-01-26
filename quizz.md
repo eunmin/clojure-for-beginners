@@ -110,5 +110,11 @@
   (.start t1)
   ;; => Thread-0
   ```
-
+  
+20. `atom`을 이용해서 `memo` 함수를 구현하시오. 사용법은 아래와 같다.
+  ```clojure
+  (def memo-inc (memo inc))
+  (memo-inc 1)
+  ;; => 2
+  ```
  
