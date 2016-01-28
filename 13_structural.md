@@ -28,6 +28,7 @@
 `case` 구문에 추가 해줘야한다. 멀티메서드는 조금 더 유연하게 확장 가능한데 위 예제를 멀티메서드로 만들어보자.
 
 * 예제는 https://clojuredocs.org/clojure.core/defmethod 에서 가져옴
+
 ```clojure
 (defmulti greeting
   (fn[x] (x "language")))
