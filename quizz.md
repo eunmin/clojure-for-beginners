@@ -121,7 +121,11 @@
   - 힌트 : 캐시 자료는 함수별로 클로저(closure)로 가지고 있으면 좋다.
   - 힌트 : 맵의 키는 벡터를 사용할 수 있다.
   
-21. `:id`, `:first-name`, `:last-name`을 가지는 `User` 레코드를 만들고 `:first-name`과 
+21. 문자열은 "문자열"(쌍따옴표 포함)로 바꿔주고 `nil`은 `null`로 바꿔주고 그외의 값들은 `(str 값)`으로 바꿔주는 `convert` 함수를
+  멀티메서드로 작성하라. 
+  - 힌트 : 값의 타입을 조회할때는 `class` 함수를 사용한다.
+
+22. `:id`, `:first-name`, `:last-name`을 가지는 `User` 레코드를 만들고 `:first-name`과 
   `:last-name`을 공백 기준으로 합쳐 리턴하는 `fullname` 프로토콜과 `:id`, `:first-name`, `:last-name`을 보기 좋게 출력하는
   `print` 프로토콜을 정의하고 구현하라.
  
