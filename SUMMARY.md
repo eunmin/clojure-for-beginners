@@ -13,7 +13,7 @@
 * [매크로](9_macros.md)
 * [메타데이터](10_metadata.md)
 * [병렬 처리에서 데이터 공유](12_concurrency.md)
-* [좀 더 구조적으로 만들기](13_structural.md)
+* [조금 더 유연하고 견고하게 만들기](13_structural.md)
 * [간단한 웹 사이트 예제](14_website_example.md)
 * [다루지 않은 부분](15_not_covered.md)
 * [연습문제](quizz.md)
