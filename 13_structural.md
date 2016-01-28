@@ -217,8 +217,11 @@ struct_sample.core.User
 단 `add-age` 프로토콜을 정의하면 루트 바인딩 처럼 심볼을 사용할 수 있기 때문에 사용하려면 프로토콜이 정의된
 네임스페이스에서 `add-age`를 불러(`require`) 쓰면 된다.
 
-... 
 
 ## core.typed
 
-## scheme
+https://github.com/clojure/core.typed
+
+## schema
+
+https://github.com/plumatic/schema
