@@ -121,4 +121,7 @@
   - 힌트 : 캐시 자료는 함수별로 클로저(closure)로 가지고 있으면 좋다.
   - 힌트 : 맵의 키는 벡터를 사용할 수 있다.
   
+21. `:id`, `:first-name`, `:last-name`을 가지는 `User` 레코드를 만들고 `:first-name`과 
+  `:last-name`을 공백 기준으로 합쳐 리턴하는 `fullname` 프로토콜과 `:id`, `:first-name`, `:last-name`을 보기 좋게 출력하는
+  `print` 프로토콜을 정의하고 구현하라.
  
