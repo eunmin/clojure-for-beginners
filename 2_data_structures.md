@@ -158,6 +158,8 @@ true
 
 확인해 본 결과 값이 같은지 비교할때 `=`를 써도 된다는 것을 알수있다.
 
+실제로 `=` 비교는 내부적으로 자바의 `equals`로 비교하기 때문에 문자열 값 비교가 정상적으로 동작한다. (https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Util.java#L33)
+
 
 ## 리스트(List)
 
