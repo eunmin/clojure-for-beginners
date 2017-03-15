@@ -118,6 +118,15 @@ wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 chmod +x ./lein
 ```
 
+#### Homebrew로 Leiningen 설치하기
+
+Homebrew\(https://brew.sh/index\_ko.html\)로 Leiningen을 설치할 수  있다.
+
+```
+brew update
+brew install leiningen
+```
+
 #### Leiningen 프로젝트 생성
 
 ```bash
@@ -128,15 +137,16 @@ lein new hello
 
 ```bash
 hello
+├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
 ├── doc
-│   └── intro.md
+│   └── intro.md
 ├── project.clj
 ├── resources
 ├── src
-│   └── hello
-│       └── core.clj
+│   └── hello
+│       └── core.clj
 └── test
     └── hello
         └── core_test.clj
@@ -223,6 +233,33 @@ Hello World
 ```
 
 실행 결과가 잘 나오는 것을 볼 수 있다.
+
+jar에 main 함수가 있는 엔트리 포인트를 지정해주면 `java -jar` 로 실행 할 수 있다.
+
+`project.clj`에 아래와 같이 추가한다.
+
+```
+:main hello.core
+```
+
+다시 jar로 패키징해서 실행해보자.
+
+```
+$lein uberjar
+Compiling hello.core
+Created ..../hello/target/hello-0.1.0-SNAPSHOT.jar
+Created ..../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
+
+$java -jar target/hello-0.1.0-SNAPSHOT-standalone.jar
+Hello World
+```
+
+`project.clj`에 `:main`을 지정해주면 `lein run`으로 실행할때 `main`함수가 있는 위치를 지정해주지 않아도 된다.
+
+```
+$lein run
+Hello World
+```
 
 ## 지금 한 일 설명
 
