@@ -313,15 +313,13 @@ Cursive\([https://cursiveclojure.com](https://cursiveclojure.com)\)는 IntelliJ 
 
 ### Atom
 
-Atom\(https://atom.io/\)은 아래와 같은 플러그인을 설치하면 도움이 된다.
+Atom\([https://atom.io\)은](https://atom.io/%29은) 아래와 같은 플러그인을 설치하면 도움이 된다.
 
 * Parinfer
 * linter-clojure
 * language-clojure
 
-
-
 ### 기타
 
-nightcode\(https://sekao.net/nightcode/\), lighttable\(http://lighttable.com/\), vim, sublimetext, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
+nightcode\([https://sekao.net/nightcode/\](https://sekao.net/nightcode/\)\), lighttable\([http://lighttable.com/\](http://lighttable.com/\)\), vim, sublimetext, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
 
