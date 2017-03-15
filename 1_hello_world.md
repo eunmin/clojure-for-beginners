@@ -37,12 +37,13 @@
 터미널에서 아래와 같은 명령어로 실행하면 REPL이 실행된다.
 
 ```bash
-java -cp clojure-1.8.0.jar clojure.main
+java -jar clojure-1.8.0.jar
 ```
 
 REPL은 클로저 코드를 입력하면 실행 결과가 바로 나온다.
 
 ```bash
+Clojure 1.8.0
 user=> (println "Hello World")
 Hello World
 nil
@@ -181,8 +182,8 @@ Leiningen은 컴파일 및 패키징 기능도 제공한다.
 `uberjar`는 의존하고 있는 jar들과 함게 jar로 묶어준다.
 
 기본적으로 `jar`와 `uberjar` 패키징 커맨드는 컴파일을 하지 않고 `clj`파일을 jar로 묶는다.  
-클로저의 라이브러리들은 `jar`로 Clojars 같은 곳으로 배포가 되는데 보통 소스 파일\(`clj`\)형태로   
-묶어 배포를 한다. 그리고 라이브러리를 사용하는 어플리케이션에서 소스파일을 컴파일해서 클래스 형태로   
+클로저의 라이브러리들은 `jar`로 Clojars 같은 곳으로 배포가 되는데 보통 소스 파일\(`clj`\)형태로  
+묶어 배포를 한다. 그리고 라이브러리를 사용하는 어플리케이션에서 소스파일을 컴파일해서 클래스 형태로  
 만든다. 클래스로 배포하지 않는 이유는 자바의 버전 문제등 여러가지 문제에 더 자유롭기 때문일 것이다.
 
 패키징시 클로저 소스파일을 컴파일 하기 위해서는 `project.clj`에 설정을 추가해줘야한다.
@@ -212,7 +213,7 @@ Created ..../hello/target/hello-0.1.0-SNAPSHOT.jar
 Created ..../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
 ```
 
-`jar`와 `standalone` `jar`가 생겼다. 그냥 `lein jar`는 위에 있는 `jar`만 생긴다.   
+`jar`와 `standalone` `jar`가 생겼다. 그냥 `lein jar`는 위에 있는 `jar`만 생긴다.  
 위에 있는 `jar`는 실행할 때 의존하고 있는 다른 클래스들을 클래스패스에 추가하고 실행해야한다.  
 `standanlone` `jar`는 의존하고 있는 클래스를 모두 포함하고 있어 크기는 크지만 독립적으로 실행 가능하다.
 
