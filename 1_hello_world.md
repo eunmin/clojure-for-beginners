@@ -120,7 +120,7 @@ chmod +x ./lein
 
 #### Homebrew로 Leiningen 설치하기
 
-Homebrew\(https://brew.sh/index\_ko.html\)로 Leiningen을 설치할 수  있다.
+Homebrew\([https://brew.sh/index\_ko.html\)로](https://brew.sh/index_ko.html%29로) Leiningen을 설치할 수  있다.
 
 ```
 brew update
@@ -141,12 +141,12 @@ hello
 ├── LICENSE
 ├── README.md
 ├── doc
-│   └── intro.md
+│   └── intro.md
 ├── project.clj
 ├── resources
 ├── src
-│   └── hello
-│       └── core.clj
+│   └── hello
+│       └── core.clj
 └── test
     └── hello
         └── core_test.clj
@@ -311,7 +311,17 @@ cider\([https://github.com/clojure-emacs/cider](https://github.com/clojure-emacs
 
 Cursive\([https://cursiveclojure.com](https://cursiveclojure.com)\)는 IntelliJ 기반의 플러그인으로 많이 사용된다.
 
+### Atom
+
+Atom\(https://atom.io/\)은 아래와 같은 플러그인을 설치하면 도움이 된다.
+
+* Parinfer
+* linter-clojure
+* language-clojure
+
+
+
 ### 기타
 
-lighttable, vim, sublimetext, atom, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
+nightcode\(https://sekao.net/nightcode/\), lighttable\(http://lighttable.com/\), vim, sublimetext, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
 
