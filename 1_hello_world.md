@@ -189,7 +189,7 @@ Leiningen은 컴파일 및 패키징 기능도 제공한다.
 
 `jar`는 파일들을 jar로 묶어준다.
 
-`uberjar`는 의존하고 있는 jar들과 함게 jar로 묶어준다.
+`uberjar`는 의존하고 있는 jar들과 함께 jar로 묶어준다.
 
 기본적으로 `jar`와 `uberjar` 패키징 커맨드는 컴파일을 하지 않고 `clj`파일을 jar로 묶는다.  
 클로저의 라이브러리들은 `jar`로 Clojars 같은 곳으로 배포가 되는데 보통 소스 파일\(`clj`\)형태로  
@@ -209,7 +209,7 @@ Leiningen은 컴파일 및 패키징 기능도 제공한다.
 
 ```clojure
 (ns hello.core
-  (:gen-class)
+  (:gen-class))
 
 (defn -main [] (println "Hello World"))
 ```
@@ -321,5 +321,5 @@ Atom\([https://atom.io\)은](https://atom.io/%29은) 아래와 같은 플러그�
 
 ### 기타
 
-nightcode\([https://sekao.net/nightcode/\](https://sekao.net/nightcode/\)\), lighttable\([http://lighttable.com/\](http://lighttable.com/\)\), vim, sublimetext, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
+nightcode\([https://sekao.net/nightcode/\](https://sekao.net/nightcode/%29\), lighttable\([http://lighttable.com/\](http://lighttable.com/%29\), vim, sublimetext, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
 
