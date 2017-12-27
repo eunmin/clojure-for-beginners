@@ -18,9 +18,9 @@
 
    알아서 설치한다.
 
-2. Clojure Command Line Tools 
+2. Clojure Command Line Tools
 
-   OSX는 homebrew\(https://brew.sh/\)로 설치할 수 있다. Linux는 공식 안내 페이지\(https://clojure.org/guides/getting\_started\)에 가서 안내대로 설치하면 되고 윈도우는 아직 커맨드 라인툴이 없다. 대신 Leiningen이나 Boot를 사용한다.
+   OSX는 homebrew\([https://brew.sh](https://brew.sh)\)로 설치할 수 있다. Linux는 공식 안내 페이지\([https://clojure.org/guides/getting\_started\)에](https://clojure.org/guides/getting_started%29에) 가서 안내대로 설치하면 되고 윈도우는 아직 커맨드 라인툴이 없다. 대신 Leiningen이나 Boot를 사용한다.
 
    ```
    brew install clojure
