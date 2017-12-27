@@ -18,32 +18,37 @@
 
    알아서 설치한다.
 
-2. Clojure JAR 파일
+2. Clojure Command Line Tools 
 
-   클로저 다운로드 페이지\([http://clojure.org/downloads](http://clojure.org/downloads)\)에서 최신버전을 다운로드 한다. 글을 작성하는 시점에 최신 버전은 1.8.0 버전이다.
+   OSX는 homebrew\(https://brew.sh/\)로 설치할 수 있다. Linux는 공식 안내 페이지\(https://clojure.org/guides/getting\_started\)에 가서 안내대로 설치하면 되고 윈도우는 아직 커맨드 라인툴이 없다. 대신 Leiningen이나 Boot를 사용한다.
 
-### 실행 방법
+   ```
+   brew install clojure
+   ```
 
-여러가지 실행 방법이 있는데
+### 코드 실행 방법
 
-1. REPL\(Read Eval Print Loop\)에서 바로 실행하기
-2. 파일에 작성된 코드를 컴파일 해서 실행하기
-3. 클로저 프로젝트를 만들어서 실행하기
+여러가지 실행 방법이 있는데 하나씩 해보자.
 
-### REPL\(Read Eval Print Loop\)에서 바로 실행하기
+1. REPL\(Read Eval Print Loop\)에서 실행하기
+2. 파일에 쓴 코드를 Command Line Tools로 실행하기
+3. 컴파일된 클래스를 java로 실행하기
+4. 클로저 프로젝트를 만들어서 실행하기
 
-다운로드 받은 Clojure JAR에는 Clojure Runtime과 컴파일러 REPL등이 포함되어 있다.
+### REPL\(Read Eval Print Loop\)에서 실행하기
+
+Clojure Command Line Tools을 설치하면 REPL을 쓸 수 있다.
 
 터미널에서 아래와 같은 명령어로 실행하면 REPL이 실행된다.
 
 ```bash
-java -jar clojure-1.8.0.jar
+$ clj
 ```
 
 REPL은 클로저 코드를 입력하면 실행 결과가 바로 나온다.
 
 ```bash
-Clojure 1.8.0
+Clojure 1.9.0
 user=> (println "Hello World")
 Hello World
 nil
@@ -52,7 +57,23 @@ user=>
 
 클로저는 REPL에서 바로 실행할 수도 있지만 자바 클래스 파일로 컴파일해서 실행할 수 있다.  컴파일 해서 실행하는 방법을 알아보자.
 
-### 파일에 작성된 코드를 컴파일 해서 실행하기
+### 파일에 쓴 코드를 실행하기
+
+`hello.clj` 파일을 만들고 아래 코드를 입력하자.
+
+```
+(println "Hello World")
+```
+
+커맨드 라인에서 아래와 같이 실행해보자.
+
+```
+$ clj hello.clj
+Hello World
+$
+```
+
+### 컴파일된 클래스를 java로 실행하기
 
 `example`라는 디렉토리를 만들고 그 안에 `hello.clj` 파일을 만들어 아래와 같이 코드를 입력하고 저장한다.
 
