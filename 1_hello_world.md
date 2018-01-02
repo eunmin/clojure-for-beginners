@@ -1,16 +1,14 @@
 # 시작하기
 
-클로저로 Hello World를 만들어 보자.
+화면에 `안녕하십니까`를 출력하는 Clojure 코드는 아래 처럼 생겼다.
 
 ```clojure
 (println "안녕하십니까")
 ```
 
-클로저 Hello World 코드는 위와 같이 생겼다.
-
 ## 실행하기
 
-위에서 작성한 코드를 실행하려면 준비물이 필요하다.
+위 코드를 실행하려면 준비물이 필요하다.
 
 ### 준비물
 
@@ -49,7 +47,7 @@ Clojure Command Line Tools을 설치하면 REPL을 쓸 수 있다.
 $ clj
 ```
 
-REPL은 클로저 코드를 입력하면 실행 결과가 바로 나온다.
+REPL은 클로저 코드를 입력하면 실행 결과가 바로 나온다. \(\* 출력 결과에 nil이 나오는데 println 함수의 리턴 값이다.\)
 
 ```bash
 Clojure 1.9.0
@@ -107,127 +105,6 @@ hello
 ├── LICENSE
 ├── README.md
 ├── doc
-│   └── intro.md
-├── project.clj
-├── resources
-├── src
-│   └── hello
-│       └── core.clj
-└── test
-    └── hello
-        └── core_test.clj
-```
-
-중요한 몇 개 파일만 살펴보면 project.clj 파일이 프로젝트 버전, 사용하는 라이브러리, 소스 파일 위치, 각종 옵션을 나타내는 파일이다.
-
-src/hello/core.clj는 leiningen이 만든 샘플 소스 파일이고 test/hello/core\_test.clj는 역시 샘플 테스트 파일이다.
-
-샘플 소스 고쳐보기
-
-아무 편집기를 열어서 src/hello/core.clj 파일을 열어 다 지우고 아래 처럼 고쳐보자. \(\*괄호에 주의\)
-
-```
-(ns hello.core (:gen-class))
-
-(defn -main [] (println "Hello World"))
-```
-
-#### 바로 실행하기
-
-정리중
-
-#### 컴파일 해서 java로 실행하기
-
-정리중
-
-#### jar로 패키징 해서 java로 실행하기
-
-정리중
-
-### 컴파일된 클래스를 java로 실행하기
-
-`example`라는 디렉토리를 만들고 그 안에 `hello.clj` 파일을 만들어 아래와 같이 코드를 입력하고 저장한다.
-
-```clojure
-(ns example.hello (:gen-class))
-
-(defn -main [] 
-  (println "Hello World"))
-```
-
-뭐가 뭔지 모르겠지만 중간에 `(println "Hello World")`가 보인다.
-
-주의할점이 하나 있는데 만약 `example`이라는 이름 대신 `-`와 같이 자바 클래스명 또는 패키지명에서 지원하지 않는 문자가 있다면 다른 문자로 대치해서 작성해야한다.  
-\([http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html\#jls-JavaLetter](http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-JavaLetter)\)
-
-예를 들어 `example` 대신 `clojure-example`이라고 만드려면 `clojure_example`이라고 디렉토리를 만들어야한다.
-
-다른 문자들은 아래 코드를 참조하면 된다.
-
-[https://github.com/clojure/clojure/blob/bfe14aec1c223abc3253358bac34b503284467d9/src/jvm/clojure/lang/Compiler.java\#L2819](https://github.com/clojure/clojure/blob/bfe14aec1c223abc3253358bac34b503284467d9/src/jvm/clojure/lang/Compiler.java#L2819)
-
-#### 컴파일 하기
-
-먼저 받은 Clojure JAR에는 컴파일 기능이 들어있다. 하지만 컴파일러를 별도의 바이너리로 제공하지는 않고 함수 형태로 제공한다. 따러서 REPL이나 다른 프로그램에서 컴파일 함수를 호출해줘야한다.
-
-컴파일을 위해 다시 REPL을 실행한다. REPL을 실행할 때 처음과 다른 부분이 있는데 소스파일을 찾기위해 현재 디렉토리를 클래스 패스로 추가해주는 부분이 있다.
-
-```bash
-mkdir classes
-java -cp .:clojure-1.8.0.jar clojure.main
-Clojure 1.8.0
-user=> (compile 'example.hello)
-example.hello
-```
-
-`(compile 'example.hello)`를 입력해서 컴파일을 한다.
-
-에러 없이 컴파일 되었다면 먼저 만들어 둔 `classes` 디렉토리 아래 `class`파일들이 여러개 생긴다.
-
-#### 컴파일된 class 실행하기
-
-자바 클래스로 컴파일 되기 때문에 `java`로 실행할 수 있다.
-
-클래스패스에 컴파일된 클래스가 있는 `classes` 디렉토리와 Clojure Runtime이 있는 Clojure JAR파일을 주고 실행하자.
-
-```bash
-java -cp classes:clojure-1.8.0.jar example.hello
-Hello World
-```
-
-### 클로저 프로젝트를 만들어서 실행하기
-
-자바의 메이븐 프로젝트와 같이 클로저도 프로젝트를 관리해주는 도구가 있다. 가장 유명한 프로젝트 관리 도구는 Leiningen\([http://leiningen.org](http://leiningen.org)\)이라는 것이 있고 좀 덜 유명하지만 뜨고 있는 Boot\([http://boot-clj.com](http://boot-clj.com)\)라는 프로젝트 관리 도구도 있다. 여기서는 Leiningen으로 실행하는 것만 알아보자.
-
-#### Leiningen 설치하기
-
-Leiningen은 스크립트 파일 형태로 되어 있어서 파일을 다운로드하고 실행권한을 주고 실행하면 된다.
-
-어디서나 실행가능하게 PATH에 추가해주면 편리하다.
-
-```bash
-wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-chmod +x ./lein
-```
-
-#### Homebrew로 Leiningen 설치하기
-
-Homebrew\([https://brew.sh/index\_ko.html\)로](https://brew.sh/index_ko.html%29로) Leiningen을 설치할 수  있다.
-
-#### Leiningen 프로젝트 생성
-
-```bash
-lein new hello
-```
-
-위의 명령어를 실행하면 `hello` 디렉토리가 생기고 그 안에 다음과 같은 파일들이 생긴다.
-
-```bash
-hello
-├── CHANGELOG.md
-├── LICENSE
-├── README.md
-├── doc
 │   └── intro.md
 ├── project.clj
 ├── resources
@@ -239,121 +116,153 @@ hello
         └── core_test.clj
 ```
 
-`project.clj`파일은 메이븐 `pom.xml`와 비슷한 기능을한다.
+중요한 몇 개 파일만 살펴보면 `project.clj` 파일이 프로젝트 버전, 사용하는 라이브러리, 소스 파일 위치, 각종 옵션을 나타내는 파일이다.
 
-`src/hello/core.clj`는 샘플 클로저 파일이다.
+`src/hello/core.clj`는 leiningen이 만든 샘플 소스 파일이고 `test/hello/core_test.clj`는 역시 샘플 테스트 파일이다.
 
-`test/hello/core_test.clj`는 샘플 클로저 테스트 파일이다.
+샘플 소스 고쳐보기
 
-#### `src/hello/core.clj` 수정하기
-
-이 파일에 Hello World를 작성한다.
-
-기본으로 만들어 준 내용은 지우고 아래와 같이 코드를 작성한다.
+아무 편집기를 열어서 `src/hello/core.clj` 파일을 열어 다 지우고 아래 처럼 고쳐보자. \(\*괄호에 주의\)
 
 ```clojure
 (ns hello.core)
 
-(defn -main [] (println "Hello World"))
+(defn -main [] (println "안녕하십니까"))
 ```
 
-#### lein으로 실행하기
+코드를 간단히 살펴보면 ns 라는 구문은 네임스페이스를 선언하는 구문이다. defn은 함수를 정의 하는 것이고 프로그램이 실행되는 지점인 `-main` 함수를 정의 했다. \(\* main 앞에 - 기호가 있는 것에 주의\)
 
-프로젝트 최상위 디렉토리\(`hello` 디렉토리\)에서 아래 명령어를 실행한다.
+#### 바로 실행하기
 
-```bash
-lein run -m hello.core
-Hello World
+`lein run` 명령어로 `src/hello/core.clj` 파일을 바로 실행할 수 있다. -m 옵션의 인자로 네임스페이스를 지정해 주면 된다. \(\* `project.clj` 파일이 있는 곳에서 실행해야한다.\)
+
+```
+$ lein run -m hello.core
+안녕하십니까
 ```
 
-#### lein으로 컴파일하기
+#### 컴파일 해서 java로 실행하기
 
-Leiningen은 컴파일 및 패키징 기능도 제공한다.
+Clojure는 jvm에서 돌아가기 때문에 Clojure 코드를 class 파일로 컴파일해서 java로 실행할 수 있다.
 
-`lein`은 서버 커맨드로 `compile`, `jar`, `uberjar`를 제공하고 있다.
+##### 컴파일하기
 
-`compile`은 소스 디렉토리로 지정된 곳에 있는 클로저 파일들을 컴파일해준다.
+`lein compile` 명령어로 `src/hello/core.clj` 파일을 컴파일 할 수 있다. 인자로 네임스페이스를 지정해 주면 된다. \(\* `project.clj` 파일이 있는 곳에서 실행해야한다.\)
 
-`jar`는 파일들을 jar로 묶어준다.
+```
+$ lein compile hello.core
+Compiling hello.core
+```
 
-`uberjar`는 의존하고 있는 jar들과 함께 jar로 묶어준다.
+컴파일이 되면 `target/classes` 디렉토리 아래 클래스 파일이 생성된다.
 
-기본적으로 `jar`와 `uberjar` 패키징 커맨드는 컴파일을 하지 않고 `clj`파일을 jar로 묶는다.  
-클로저의 라이브러리들은 `jar`로 Clojars 같은 곳으로 배포가 되는데 보통 소스 파일\(`clj`\)형태로  
-묶어 배포를 한다. 그리고 라이브러리를 사용하는 어플리케이션에서 소스파일을 컴파일해서 클래스 형태로  
-만든다. 클래스로 배포하지 않는 이유는 자바의 버전 문제등 여러가지 문제에 더 자유롭기 때문일 것이다.
+```
+target/classes
+├── META-INF
+│   └── maven
+│       └── hello
+│           └── hello
+│               └── pom.properties
+└── hello
+    ├── core$_main.class
+    ├── core$fn__38.class
+    ├── core$loading__5569__auto____36.class
+    └── core__init.class
+```
 
-패키징시 클로저 소스파일을 컴파일 하기 위해서는 `project.clj`에 설정을 추가해줘야한다.
+네임스페이스는 자바의 패키지 구조와 같이 디렉토리, 파일명 제약을 가진다. `target/classes/hello` 디렉토리 아래 클래스가 여러개 생긴 것을 볼 수 있다. 하지만 어떤 클래스가 실행 가능한? 클래스인지 알 수 없다.
+
+##### 실행하기
+
+Clojure는 기본적으로 네임스페이스 단위로 class를 만들지 않고 function 단위로 class를 만든다. java로 class를 실행하기 위해서는 자바 main 함수가 있는 클래스를 만들어야한다. 네임스페이스를 클래스로 만드려면 ns 구문에 `:gen-class` 라는 지시문을 넣어주면 된다. \(\* 그냥 실행할 때 :gen-class 지시어가 필요없는 이유는 클래스를 생성하지 않고 동적으로 evaluation 하기 때문이다.\)  `src/hello/core.clj` 파일을 아래 처럼 고쳐서 다시 컴파일 해보자. 
 
 ```clojure
-:profiles {:uberjar {:aot :all}}
+(ns hello.core (:gen-class))
+
+(defn -main [] (println "안녕하십니까"))
 ```
 
-을 추가한다. Leiningen은 lein 명령어를 실행하는 환경별로 다른 설정을 줄 수 있도록 하는 `profile`이라는 기능을 제공한다.
+```
+$ lein compile hello.core
+Compiling hello.core
+```
 
-위 설정은 `uberjar` 프로필로 실행되는 `lein`명령어에 `:aot :all` 옵션을 추가한 것이다.  
-모든 소스파일을 컴파일 해서 클래스로 만드라는 옵션이다.
+컴파일이 되면 이제 `target/classes/hello` 디렉토리 아래 `core.class`가 생긴것을 볼 수 있다.
+
+이제 java로 실행해보자. `core.class`는 `clojure.jar` 의존성을 가지고 있기 때문에 classpath에 `clojure.jar`를 주면 된다. 다행이 leiningen이 처음 실행하면서 `clojure.jar`를 로컬 `~/.m2`에 다운로드 해놨기 때문에 \(\* 아직 clojure 1.8.0을 쓰고 있지만...\) `~/.m2` 아래 있는 `clojure.jar`를 classpath에 주면 된다.
+
+```
+$ java -cp ~/.m2/repository/org/clojure/clojure/1.8.0/clojure-1.8.0.jar:./target/classes hello.core
+안녕하십니까
+```
+
+#### jar로 패키징 해서 java로 실행하기
+
+java 애플리케이션은 jar로 의존성 파일들과 함께 패키징해서 사용하면 편리하다. leiningen으로도 jar 패키징을 할 수 있다. leiningen은 기본적으로 jar 패키징 할 때 컴파일을 하지 않고 `.clj` 파일 그대로 jar로 묶는다. 보통 clojure 라이브러리들은 컴파일 되지 않은 소스 파일 형태로 패키징 된다. 그래서 leiningen으로 패키징 할때 .`clj` 파일을 컴파일 하려면 `project.clj`에 다음과 같이 `:profiles {:uberjar {:aot :all}}`  옵션을 추가해줘야한다.
 
 ```clojure
-(ns hello.core
-  (:gen-class))
-
-(defn -main [] (println "Hello World"))
+(defproject hello "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.8.0"]]
+  :profiles {:uberjar {:aot :all}})
 ```
 
-기존 코드에 `:gen-class` 옵션을 추가해 자바 엔트리 포인트를 만들어 주고 아래와 같이 패키징을 해보자.
+`lein uberjar` 명령어로 jar로 패키징 한다.
 
-```bash
-$lein uberjar
+```
+$ lein uberjar
 Compiling hello.core
-Created ..../hello/target/hello-0.1.0-SNAPSHOT.jar
-Created ..../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
+Created .../hello/target/hello-0.1.0-SNAPSHOT.jar
+Created .../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
 ```
 
-`jar`와 `standalone` `jar`가 생겼다. 그냥 `lein jar`는 위에 있는 `jar`만 생긴다.  
-위에 있는 `jar`는 실행할 때 의존하고 있는 다른 클래스들을 클래스패스에 추가하고 실행해야한다.  
-`standanlone` `jar`는 의존하고 있는 클래스를 모두 포함하고 있어 크기는 크지만 독립적으로 실행 가능하다.
-
-```bash
-$ java -cp target/hello-0.1.0-SNAPSHOT-standalone.jar hello.core
-Hello World
-```
-
-실행 결과가 잘 나오는 것을 볼 수 있다.
-
-jar에 main 함수가 있는 엔트리 포인트를 지정해주면 `java -jar` 로 실행 할 수 있다.
-
-`project.clj`에 아래와 같이 추가한다.
+`target` 디렉토리 아래 jar 파일이 두개 생기는데 `-standalone.jar` 으로 끝나는 파일이 의존성과 함께 묶인 jar다. 이제 java로 실행해보자.
 
 ```
-:main hello.core
+$ java -cp ./target/hello-0.1.0-SNAPSHOT-standalone.jar hello.core
+안녕하십니까
 ```
 
-다시 jar로 패키징해서 실행해보자.
+jar 파일을 묶을 때 main 함수가 있는 네임스페이스를 지정해 주면 java jar 옵션으로 실행할 수 있다. main 함수가 있는 네임스페이스는 `project.clj`에 다음과 같이 지정할 수 있다.
 
 ```
-$lein uberjar
+(defproject hello "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.8.0"]]
+  :profiles {:uberjar {:aot :all}}
+  :main hello.core)
+```
+
+다시 jar를 묶고 java jar 옵션으로 실행해보자.
+
+```
+$ lein uberjar
 Compiling hello.core
-Created ..../hello/target/hello-0.1.0-SNAPSHOT.jar
-Created ..../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
-
-$java -jar target/hello-0.1.0-SNAPSHOT-standalone.jar
-Hello World
+Created .../hello/target/hello-0.1.0-SNAPSHOT.jar
+Created .../hello/target/hello-0.1.0-SNAPSHOT-standalone.jar
+$ java -jar ./target/hello-0.1.0-SNAPSHOT-standalone.jar 
+안녕하십니까
 ```
 
-`project.clj`에 `:main`을 지정해주면 `lein run`으로 실행할때 `main`함수가 있는 위치를 지정해주지 않아도 된다.
+`project.clj`에 `:main`을 지정해주면 `lein run`으로 실행할때 `main`함수가 있는 네임스페이스를 지정해주지 않아도 된다.
 
 ```
 $lein run
-Hello World
+안녕하십니까
 ```
 
-## 지금 한 일 설명
+## 정리
 
-### Hello World 코드의 모양
+### Clojure 코드의 모양
 
 ```clojure
-(println "Hello World")
+(println "안녕하십니까")
 ```
 
 * 클로저 코드는 괄호`()`안에 들어 있다.
@@ -361,29 +270,25 @@ Hello World
 * 따옴표 `""`안에 있는 것은 문자열이다.
 * 첫번째 구문은 함수로 동작하고 두번째 구문 부터는 함수의 파라미터로 동작한다. 
 * 결국 Hello World 코드는 `println` 함수를 `"Hello World"`라는 하나의 파라미터를 가지고 실행하는 코드다.
+* 한글을 쓸 수 있다.
 
-### 처음 만든 Hello World 파일 코드
+### 파일로 만든 Clojure 코드의 모양
 
 ```clojure
-(ns example.hello (:gen-class))
+(ns hello.core (:gen-class))
 
 (defn -main [] (println "Hello World"))
 ```
 
 * `()`는 중첩될 수 있다.
 * `ns`는 파일의 네임스페이스라고 부르는 것을 지정하는 구문으로 자바의 패키지와 유사하다.
-* `example.hello` 네임스페이스는 자바의 패키지 처럼 디렉토리 구조와 파일명을 `example/hello.clj`으로 제한된다. 다르면 자바처럼  컴파일 에러가 난다.
-* `defn`는 함수를 정의하는 구문으로 여러개의 파라미터를 가진다. 위에서는 첫번째 파라미터로 `-main`, 두번째 파라미터로 `[]`, 세번째 파라미터로 `(println "Hello World")`를 가진다.
+* `example.hello` 네임스페이스는 자바의 패키지 처럼 디렉토리 구조와 파일명을 `hello/core.clj`으로 제한된다. 다르면 자바처럼  컴파일 에러가 난다.
+* `defn`는 함수를 정의하는 구문으로 여러개의 파라미터를 가진다. 위에서는 첫번째 파라미터로 `-main`, 두번째 파라미터로 `[]`, 세번째 파라미터로 `(println "안녕하십니까")`를 가진다.
 * `-main`이라는 이름의 함수는 클로저에서 특별하게 자바의 main 함수를 만들어 준다.
 * 두번째 파라미터인 `[]`는 함수의 인자를 지정하는 것으로 위에서는 인자가 없다는 뜻이다. 인자가 있다면 `[x y]`등으로 인자 이름을 나열해준다. 타입은 없다.
 * 함수에 마지막 실행 결과가 리턴 값이다.
-* 컴파일 결과 클래스를 생성하기 위해서 네임스페이스 두번째 인자로 \(:gen-class\)구문을 넣었다.
-* 클로저는 함수 단위로 컴파일된 클래스를 생성한다.
-
-## 생길 수 있는 궁금증
-
-* repl에서 보였던 `nil`은? 널. 왜보였냐? repl은 함수의 리턴값을 표시해주고 `println`에 리턴 값이 `nil`이 였다.
-* Leiningen으로 실행할 때는 `(:gen-class)`가 없었다? `lein run`는 내부에서 REPL을 실행하고 함수를 바로 부르기 때무에 클래스 파일을 만들지 않는다.
+* 컴파일 결과 클래스를 생성하기 위해서 네임스페이스 두번째 인자로 `(:gen-class)`구문을 넣었다.
+* Clojure는 함수 단위로 컴파일된 클래스를 생성한다.
 
 ## 편집기
 
