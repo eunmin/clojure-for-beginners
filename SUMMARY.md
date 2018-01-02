@@ -1,8 +1,8 @@
 # Summary
 
 * [Introduction](README.md)
-* [Hello Word](1_hello_world.md)
-* [클로저 데이터 형식](2_data_structures.md)
+* [시작하기](1_hello_world.md)
+* [데이터 구조](2_data_structures.md)
 * [Vars](4_vars.md)
 * [함수](3_functions.md)
 * [조건문](5_conditional.md)
