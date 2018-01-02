@@ -159,10 +159,10 @@ Compiling hello.core
 ```
 target/classes
 ├── META-INF
-│   └── maven
-│       └── hello
-│           └── hello
-│               └── pom.properties
+│   └── maven
+│       └── hello
+│           └── hello
+│               └── pom.properties
 └── hello
     ├── core$_main.class
     ├── core$fn__38.class
@@ -174,7 +174,7 @@ target/classes
 
 ##### 실행하기
 
-Clojure는 기본적으로 네임스페이스 단위로 class를 만들지 않고 function 단위로 class를 만든다. java로 class를 실행하기 위해서는 자바 main 함수가 있는 클래스를 만들어야한다. 네임스페이스를 클래스로 만드려면 ns 구문에 `:gen-class` 라는 지시문을 넣어주면 된다. \(\* 그냥 실행할 때 :gen-class 지시어가 필요없는 이유는 클래스를 생성하지 않고 동적으로 evaluation 하기 때문이다.\)  `src/hello/core.clj` 파일을 아래 처럼 고쳐서 다시 컴파일 해보자. 
+Clojure는 기본적으로 네임스페이스 단위로 class를 만들지 않고 function 단위로 class를 만든다. java로 class를 실행하기 위해서는 자바 main 함수가 있는 클래스를 만들어야한다. 네임스페이스를 클래스로 만드려면 ns 구문에 `:gen-class` 라는 지시문을 넣어주면 된다. \(\* 그냥 실행할 때 :gen-class 지시어가 필요없는 이유는 클래스를 생성하지 않고 동적으로 evaluation 하기 때문이다.\)  `src/hello/core.clj` 파일을 아래 처럼 고쳐서 다시 컴파일 해보자.
 
 ```clojure
 (ns hello.core (:gen-class))
@@ -297,7 +297,7 @@ $lein run
 
 ### Emacs
 
-cider\([https://github.com/clojure-emacs/cider](https://github.com/clojure-emacs/cider)\)와 clojure-mode를 조합해서 사용한다. clojure 관련 패키지들도 많이 있다.\([https://github.com/clojure-emacs](https://github.com/clojure-emacs)\)
+Clojure 개발자가 가장 많이\(2016년 기준 [http://blog.cognitect.com/blog/2017/1/31/state-of-clojure-2016-results](http://blog.cognitect.com/blog/2017/1/31/state-of-clojure-2016-results)\) 사용하는 에디터다. cider\([https://github.com/clojure-emacs/cider](https://github.com/clojure-emacs/cider)\)와 clojure-mode를 조합해서 사용한다. clojure 관련 패키지들도 많이 있다.\([https://github.com/clojure-emacs](https://github.com/clojure-emacs)\)
 
 ### Cursive
 
@@ -305,7 +305,7 @@ Cursive\([https://cursiveclojure.com](https://cursiveclojure.com)\)는 IntelliJ 
 
 ### Atom
 
-Atom\([https://atom.io\)은](https://atom.io/%29은) 아래와 같은 플러그인을 설치하면 도움이 된다.
+처음 사용하기 좋은 에디터로 아래와 같은 플러그인을 설치해서 사용하면 된다.
 
 * Parinfer
 * linter-clojure
@@ -314,4 +314,12 @@ Atom\([https://atom.io\)은](https://atom.io/%29은) 아래와 같은 플러그�
 ### 기타
 
 nightcode\([https://sekao.net/nightcode/\](https://sekao.net/nightcode/%29\), lighttable\([http://lighttable.com/\](http://lighttable.com/%29\), vim, sublimetext, eclipse 대부분의 편집기는 클로저 플러그인을 제공한다.
+
+## 커뮤니티
+
+Facebook Clojure Korea \([https://www.facebook.com/groups/defnclojure](https://www.facebook.com/groups/defnclojure)\)
+
+Facebook Clojure Bridge Seoul \([https://www.facebook.com/groups/clojurebridge.seoul](https://www.facebook.com/groups/clojurebridge.seoul)\)
+
+Clojure Korea Slack \([https://clojure-korea.slack.com](https://clojure-korea.slack.com)\)
 
