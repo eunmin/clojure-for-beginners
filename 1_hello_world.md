@@ -1,9 +1,9 @@
-# Hello World
+# 시작하기
 
 클로저로 Hello World를 만들어 보자.
 
 ```clojure
-(println "Hello World")
+(println "안녕하십니까")
 ```
 
 클로저 Hello World 코드는 위와 같이 생겼다.
@@ -32,8 +32,12 @@
 
 1. REPL\(Read Eval Print Loop\)에서 실행하기
 2. 파일에 쓴 코드를 Command Line Tools로 실행하기
-3. 컴파일된 클래스를 java로 실행하기
-4. 클로저 프로젝트를 만들어서 실행하기
+3. Leiningen 프로젝트 관리툴로 실행하기
+   1. 설치하기
+   2. 프로젝트 만들기
+   3. 바로 실행하기
+   4. 컴파일 해서 java로 실행하기
+   5. jar로 패키징 해서 java로 실행하기
 
 ### REPL\(Read Eval Print Loop\)에서 실행하기
 
@@ -49,7 +53,7 @@ REPL은 클로저 코드를 입력하면 실행 결과가 바로 나온다.
 
 ```bash
 Clojure 1.9.0
-user=> (println "Hello World")
+user=> (println "안녕하십니까")
 Hello World
 nil
 user=>
@@ -62,7 +66,7 @@ user=>
 `hello.clj` 파일을 만들고 아래 코드를 입력하자.
 
 ```
-(println "Hello World")
+(println "안녕하십니까")
 ```
 
 커맨드 라인에서 아래와 같이 실행해보자.
@@ -72,6 +76,73 @@ $ clj hello.clj
 Hello World
 $
 ```
+
+### Leiningen 프로젝트 관리툴로 실행하기
+
+Clojure 세상에도 다른 언어들처럼 프로젝트 관리툴이 있다. 가장 많이 사용하고 있는 툴은 Leiningen\([http://leiningen.org](http://leiningen.org)\)이다. 다음으로 많이 사용하는 툴은 Boot\([http://boot-clj.com](http://boot-clj.com)\)지만 아직 대부분의 사람들이 Leiningen을 사용하고 있다. 그래서 문서에서는 Leiningen을 사용해서 설명한다.
+
+#### 설치하기
+
+Homebrew로 설치할 수 있다.
+
+```
+$ brew install leiningen
+```
+
+#### 프로젝트 만들기
+
+leiningen을 설치하면 lein이라는 커맨드 라인 툴을 쓸 수 있다. 프로젝트는 lein의 new 커맨드로 만들 수 있다.
+
+```
+$ lein new hello
+```
+
+\*만약 프로젝트 이름에 자바에서 패키지 이름으로 쓸 수 없는 문자\(JavaLetter가 아닌 문자 [http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html\#jls-JavaLetter](http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-JavaLetter)\)가 있다면 규칙\([https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Compiler.java\#L2844](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Compiler.java#L2844)\)에 따라서 디렉토리나 파일명이 바뀐다. 예를 들면 프로젝트명에 `-`가 있다면 `_`로 바뀐다.
+
+`hello`라는 디렉토리가 만들어 졌고 아래 처럼 생겼다.
+
+```
+hello
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── doc
+│   └── intro.md
+├── project.clj
+├── resources
+├── src
+│   └── hello
+│       └── core.clj
+└── test
+    └── hello
+        └── core_test.clj
+```
+
+중요한 몇 개 파일만 살펴보면 project.clj 파일이 프로젝트 버전, 사용하는 라이브러리, 소스 파일 위치, 각종 옵션을 나타내는 파일이다.
+
+src/hello/core.clj는 leiningen이 만든 샘플 소스 파일이고 test/hello/core\_test.clj는 역시 샘플 테스트 파일이다.
+
+샘플 소스 고쳐보기
+
+아무 편집기를 열어서 src/hello/core.clj 파일을 열어 다 지우고 아래 처럼 고쳐보자. \(\*괄호에 주의\)
+
+```
+(ns hello.core (:gen-class))
+
+(defn -main [] (println "Hello World"))
+```
+
+#### 바로 실행하기
+
+정리중
+
+#### 컴파일 해서 java로 실행하기
+
+정리중
+
+#### jar로 패키징 해서 java로 실행하기
+
+정리중
 
 ### 컴파일된 클래스를 java로 실행하기
 
@@ -142,11 +213,6 @@ chmod +x ./lein
 #### Homebrew로 Leiningen 설치하기
 
 Homebrew\([https://brew.sh/index\_ko.html\)로](https://brew.sh/index_ko.html%29로) Leiningen을 설치할 수  있다.
-
-```
-brew update
-brew install leiningen
-```
 
 #### Leiningen 프로젝트 생성
 
