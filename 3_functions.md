@@ -1,6 +1,6 @@
 # 함수
 
-클로저의 함수는 값이다.
+함수는 값이다.
 
 ## 함수 부르기
 
@@ -17,7 +17,7 @@ user=> (+ 1 2)
 3
 ```
 
-함수 안에 함수를 부를 수도 있다. 클로저는 내부적으로 중첩된 괄호가 있을 때 안쪽 부터 평가된다. 하지만 논리적으로 코드는 실행 순서가 없기 때문에 안쪽 부터 하던지 바깥쪽 부터 하던지 결과는 같다.
+함수 안에 함수를 부를 수도 있다. 클로저는 내부적으로 중첩된 괄호가 있을 때 안쪽 부터 평가된다. \(Eager Evaluation\)
 
 ```clojure
 user=> (+ (+ 1 2) 3)
@@ -88,7 +88,7 @@ user=> (add 1 2)
 3
 ```
 
-`defn` 구문도 docstring을 넣을 수 있다. 
+`defn` 구문도 docstring을 넣을 수 있다.
 
 ```clojure
 user=> (defn add "Add function" [x y] (+ x y))
@@ -115,7 +115,7 @@ user=> x
 CompilerException java.lang.RuntimeException: Unable to resolve symbol: x in this context, compiling:(NO_SOURCE_PATH:0:0) 
 user=> y
 
-CompilerException java.lang.RuntimeException: Unable to resolve symbol: y in this context, compiling:(NO_SOURCE_PATH:0:0) 
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: y in this context, compiling:(NO_SOURCE_PATH:0:0)
 ```
 
 파라미터 심볼과 같은 이름의 심볼이 `let` 구문에 연결되었다면 파라미터 심볼도 가려진다.
@@ -140,7 +140,7 @@ user=> (apply-one-two add)
 3
 ```
 
-위의 예제는 어떤 함수인지 모르지만 함수를 하나 받아 1과 2를 넘겨 실행하는 `apply-one-two` 함수를 만들었다.
+위의 예제는 어떻게 동작할지 모르는 함수를 하나 받아 1과 2를 넘겨 실행하는 `apply-one-two` 함수를 만들었다.
 
 그리고 `x`와 `y`를 받아 더해주는 `add`도 만들었다.
 
@@ -157,7 +157,7 @@ user=> ((get-increase-function) 1)
 2
 ```
 
-위 예제는 파라미터 하나를 받아 1을 더하는 `increase` 함수와 `incease` 함수를 리턴하는 `get-increase-function`을 만들고 `get-incease-function`를 평가한 결과(`increase` 함수) 에 `1`을 넘겨 `2`라는 결과를 얻었다. 
+위 예제는 파라미터 하나를 받아 1을 더하는 `increase` 함수와 `incease` 함수를 리턴하는 `get-increase-function`을 만들고 `get-incease-function`를 평가한 결과\(`increase` 함수\) 에 `1`을 넘겨 `2`라는 결과를 얻었다.
 
 ## Closure
 
@@ -171,14 +171,14 @@ user=> ((add 1) 2)
 ```
 
 위 예제는 `x`를 인자로 받아 `y`를 인자로 받아 `x`와 `y`를 더하는 함수인 `add` 함수를 만들었다.
- 
+
 여기서 `y`값은 일반 함수 처럼 함수가 종료되고 나서 사라지지 않고 결과 함수가 사용되는 곳에서 계속 유지된다.
 
-위 예제는 커링 예제다. 커링이란 파라미터를 여러개 받을 수 있는 함수만드는 방법이다.
+위 예제는 커링 예제다. 커링이란 단일 파라미터 함수로 여러개 파라미터를 받는 함수를 표현하는 방법이다.
 
 ## 가변 인자를 받는 함수
 
-가변 인자를 받는 함수를 만들 때는 마지막 인자 앞에 `&`을 붙여서 만든다. 
+가변 인자를 받는 함수를 만들 때는 마지막 인자 앞에 `&`을 붙여서 만든다.
 
 가변 인자로 사용된 마지막 인자는 벡터로 넘어온다. 넘기지 않는다면 `nil`이 넘어온다.
 
@@ -212,6 +212,4 @@ ArityException Wrong number of args (3) passed to: user/sum  clojure.lang.AFn.th
 ## 패턴매칭은 없는가?
 
 클로저의 multimethod를 이용하면 패턴매칭 처럼 사용할 수 있다.
-
-
 
