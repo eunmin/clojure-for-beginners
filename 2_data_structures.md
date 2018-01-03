@@ -1,17 +1,16 @@
 # 데이터 구조
 
-클로저에는 여러가지 데이터 형식이 있다.
-
-앞으로 나오는 코드를 테스트 하기위해 REPL을 실행한다.  
-REPL을 그냥 Clojure JAR를 가지고 실행할 수 도 있지만 보통 Leiningen에 제공하는 `lein repl` 명령어로 실행하면 더 사용하기 좋다.
+Clojure에 있는 데이터 구조에 대해 알아보자. REPL로 연습하면서 해보자. 아래 명령어로 REPL을 실행한다.
 
 ```clojure
-lein repl
+$ clj
+Clojure 1.9.0
+user=>
 ```
 
 ## 불리언\(Boolean\)
 
-다른 언어에서도 볼 수 있는 true와 false로 true false라고 쓴다.
+참과 거짓 값을 표현하는 데이터 구조다. 참 값은 true, 거짓 값은 false로 표현한다.
 
 ```clojure
 user=> true
@@ -67,7 +66,7 @@ user=> 1/3
 
 사칙 연산 함수들을 제공하고 함수명은 각각 `+`, `-`, `*`, `/`이다.
 
-Hello World에서 봤던 함수 실행 형태를 다시 설명하면 `(함수명 파라미터값 파라미터값 파라미터값 ...)`형태로 실행한다.
+함수는 `(함수명 파라미터값 파라미터값 파라미터값 ...)`형태로 실행한다.
 
 ```clojure
 user=> (+ 1 2)
@@ -162,7 +161,7 @@ true
 
 실제로 `=` 비교는 내부적으로 자바의 `equals`로 비교하기 때문에 문자열 값 비교가 정상적으로 동작한다. \([https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Util.java\#L33](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Util.java#L33)\)
 
-## 리스트\(List\)
+## \* 리스트\(List\)
 
 순서가 있는 값의 목록으로 `(항목 항목 항목)`형태로 표현한다.
 
@@ -335,7 +334,7 @@ user=> (contains? #{:id :name :level} :id)
 true
 ```
 
-## 심볼\(Symbol\)
+## \* 심볼\(Symbol\)
 
 그냥 문자들은 심볼 데이터이고 평가되면 연결된 값으로 바꾸는 동작을 하기 때문에 보통 이름으로 사용한다.
 
@@ -357,7 +356,35 @@ user=> '더하기
 
 심볼은 값에 바인딩되어 값의 이름으로 사용될 수 있다.
 
-## 함수\(Function\)
+## \* 함수\(Function\)
 
 함수도 값이다.
+
+## 값을 평가하는 법
+
+아래 코드의 결과는 `2`다.
+
+```
+(+ 1 1)
+```
+
+위 코드는 리스트에 3개 항목이 들어 있는 데이터 구조다. +, 1, 1
+
+데이터 구조이지만 코드이다. Clojure는 코드를 리스트 데이터 구조에 담아서 표현한다.
+
+코드를 그 언어에서 쓰는 데이터 구조로 표현하는 것을 Homoiconicity\([https://en.wikipedia.org/wiki/Homoiconicity\)라고](https://en.wikipedia.org/wiki/Homoiconicity%29라고) 한다.
+
+Homoiconicity 특징을 가지는 언어는 그 언어로 언어를 프로그래밍 하기 쉽다는 장점이 있다. \(메타 프로그래밍\)
+
+위 코드에서 결과가 2가 되는 이유는
+
+**리스트 타입 데이터 구조**는 첫번 째 항목을 함수 값이라고 생각하고 나머지를 그 함수의 인자로 평가하기 때문이다.
+
++는 심볼이지만 함수 값인 이유는 + 심볼과 함수값을 연결해 놨기 때문이다.
+
+**심볼 타입 데이터 구조**는 그 심볼과 연결된 값으로 바꾼다.
+
+심볼과 값은 Var라는 테이블에 연결 정보를 저장한다.
+
+그외 다른 값은 그 값 그대로 평가된다.
 

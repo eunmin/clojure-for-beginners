@@ -6,7 +6,7 @@
 
 ## Var 만들기
 
-`def` 구문으로 Var를 만들 수 있다. 
+`def` 구문으로 Var를 만들 수 있다.
 
 ```clojure
 user=> (def a 1)
@@ -22,7 +22,7 @@ user=> a
 ```clojure
 user=> b
 
-CompilerException java.lang.RuntimeException: Unable to resolve symbol: b in this context, compiling:(NO_SOURCE_PATH:0:0) 
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: b in this context, compiling:(NO_SOURCE_PATH:0:0)
 ```
 
 같은 심볼에 새로운 값으로 Var을 만들면 값이 바뀌지 않고 심볼과 새로운 값에 연결된 Var를 만든다.
@@ -84,7 +84,7 @@ user=> (+ x y)
 3
 ```
 
-만약 지역적으로 사용될 이름이 필요하다면 `let`구문을 쓰면 된다. 
+만약 지역적으로 사용될 이름이 필요하다면 `let`구문을 쓰면 된다.
 
 ```clojure
 user=> (def a 1)
@@ -130,9 +130,9 @@ user=> a
 1
 ```
 
-동적으로 바인딩 되는 Var는 Var를 만들 때 심볼 앞레 `^:dynamic`이라는 메타데이터를 준다. (메타데이터는 나중에 다룬다.)
+동적으로 바인딩 되는 Var는 Var를 만들 때 심볼 앞레 `^:dynamic`이라는 메타데이터를 준다. \(메타데이터는 나중에 다룬다.\)
 
-클로저 세계에서는 dynamic var를 사용할때 조심하라고 심볼 앞뒤로 귀마게 표시(**)를 붙이는 네이밍 규칙을 쓴다.
+클로저 세계에서는 dynamic var를 사용할때 조심하라고 심볼 앞뒤로 귀마게 표시\(\*\*\)를 붙이는 네이밍 규칙을 쓴다.
 
 ```clojure
 user=> (def ^:dynamic *a* 1)
@@ -143,10 +143,9 @@ user=> *a*
 1
 ```
 
-## Root Var를 동적으로 다시 바인딩하기 (잠간 함수가 나옴 -_-)
+## Root Var를 동적으로 다시 바인딩하기 \(잠간 함수가 나옴 -\_-\)
 
 `binding` 구문은 지역적으로 Var를 다시 연결 하는 기능을 하지만 Root Var을 동적으로 다시 바인딩 하려면 `alter-var-root` 함수를 사용한다.
-
 
 ```clojure
 user=> (def a 1)
@@ -169,8 +168,8 @@ user=> a
 
 클로저는 함수형 프로그래밍 스타일에 따라 대부분 값을 변경되지 않는 스타일을 사용하기 때문에 `alter-var-root`를 변수 처럼 사용하는 일은 없어야한다.
 
-참고로 `alter-var-root`는 내부적으로 `synchronized`되어 있다.
-(https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Var.java#L302)
+참고로 `alter-var-root`는 내부적으로 `synchronized`되어 있다.  
+\([https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Var.java\#L302](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/Var.java#L302)\)
 
 ### 덤
 
@@ -194,7 +193,6 @@ user=> (alter-var-root #'a (constantly 2))
 user=> a
 2
 ```
-
 
 
 
