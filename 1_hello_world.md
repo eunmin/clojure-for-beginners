@@ -14,6 +14,10 @@
 
 1.  Java 8, 11, 21
 
+    ```
+    brew tap homebrew/cask-versions
+    brew install --cask temurin21
+    ```
 
 2.  Clojure Command Line Tools
 
